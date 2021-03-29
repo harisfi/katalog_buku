@@ -1,53 +1,70 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<?php include("includes/head.php") ?>
+  <?php include("includes/head.php") ?>
 </head>
+
 <body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="#"><b>Admin</b>Katalog Buku</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-      <span class="text-danger">Maaf Username dan Password Anda Salah</span>
-      <form action="profil.php" method="post">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit"  name="login" value="login" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-      <!-- /.social-auth-links -->
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="#"><b>Admin</b>Katalog Buku</a>
     </div>
-    <!-- /.login-card-body -->
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <?php if (!empty($_GET['gagal'])) { ?>
+          <?php if ($_GET['gagal'] == "userKosong") { ?>
+            <span class="text-danger">
+              Maaf Username Tidak Boleh Kosong
+            </span>
+          <?php } else if ($_GET['gagal'] == "passKosong") { ?>
+            <span class="text-danger">
+              Maaf Password Tidak Boleh Kosong
+            </span>
+          <?php } else { ?>
+            <span class="text-danger">
+              Maaf Username dan Password Anda Salah
+            </span>
+          <?php } ?>
+        <?php } ?>
+        <form action="konfirmasilogin.php" method="post">
+          <div class="input-group mb-3">
+            <input type="text" name="username" class="form-control" placeholder="Username" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Password" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8"></div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" name="login" value="login" class="btn btn-primary btn-block">
+                Sign In
+              </button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+        <!-- /.social-auth-links -->
+      </div>
+      <!-- /.login-card-body -->
+    </div>
   </div>
-</div>
-<!-- /.login-box -->
+  <!-- /.login-box -->
 
-<?php include("includes/script.php") ?>
-
+  <?php include("includes/script.php") ?>
 </body>
+
 </html>
