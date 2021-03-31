@@ -53,10 +53,10 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
           <!-- /.card-header -->
           <div class="card-body">
             <div class="col-md-12">
-              <form method="" action="">
+              <form method="GET">
                 <div class="row">
                   <div class="col-md-4 bottom-10">
-                    <input type="text" class="form-control" id="kata_kunci" name="katakunci">
+                    <input type="text" class="form-control" id="kata_kunci" name="katakunci" value="<?= (isset($_GET['katakunci'])) ? $_GET['katakunci'] : '' ?>">
                   </div>
                   <div class="col-md-5 bottom-10">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>&nbsp; Search</button>
@@ -90,7 +90,12 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
               </thead>
               <tbody>
                 <?php
-                $sql_k = "SELECT `id_kategori_buku`,`kategori_buku` FROM `kategori_buku` ORDER BY `kategori_buku`";
+                $sql_k = "SELECT `id_kategori_buku`,`kategori_buku` FROM `kategori_buku`";
+                if (isset($_GET['katakunci'])) {
+                  $katakunci = $_GET['katakunci'];
+                  $sql_k .= " WHERE kategori_buku LIKE '%$katakunci%'";
+                }
+                $sql_k .= " ORDER BY `kategori_buku`";
                 $query_k = mysqli_query($koneksi, $sql_k);
                 $no = 1;
                 while ($data_k = mysqli_fetch_row($query_k)) {

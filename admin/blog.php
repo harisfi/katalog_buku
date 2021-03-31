@@ -57,7 +57,7 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
               <form method="" action="">
                 <div class="row">
                   <div class="col-md-4 bottom-10">
-                    <input type="text" class="form-control" id="kata_kunci" name="katakunci">
+                    <input type="text" class="form-control" id="kata_kunci" name="katakunci" value="<?= (isset($_GET['katakunci'])) ? $_GET['katakunci'] : '' ?>">
                   </div>
                   <div class="col-md-5 bottom-10">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>&nbsp; Search</button>
@@ -93,7 +93,13 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
               </thead>
               <tbody>
                 <?php
-                $sql_k = "SELECT id_blog, (SELECT kategori_blog FROM kategori_blog WHERE id_kategori_blog = blog.id_kategori_blog), judul, tanggal FROM blog";
+                $sql_kategori = "SELECT kategori_blog FROM kategori_blog WHERE id_kategori_blog = blog.id_kategori_blog";
+                $sql_k = "SELECT id_blog, ($sql_kategori), judul, tanggal FROM blog";
+                if (isset($_GET['katakunci'])) {
+                  $katakunci = $_GET['katakunci'];
+                  $sql_k .= " WHERE ($sql_kategori) LIKE '%$katakunci%' OR judul LIKE '%$katakunci%' OR tanggal LIKE '%$katakunci%'";
+                }
+                $sql_k .= " ORDER BY ($sql_kategori)";
                 $query_k = mysqli_query($koneksi, $sql_k);
                 $no = 1;
                 while ($data_k = mysqli_fetch_row($query_k)) {
