@@ -45,3 +45,5 @@
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
 </script>
+<!-- realtimePasswordValidator -->
+<script src="plugins/realtimePasswordValidator.js"></script>
