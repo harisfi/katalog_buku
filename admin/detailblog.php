@@ -1,4 +1,5 @@
 <?php
+include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 if (isset($_GET['data'])) {
   $id_blog = $_GET['data'];
