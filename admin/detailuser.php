@@ -1,3 +1,18 @@
+<?php
+include('../koneksi/koneksi.php');
+if (isset($_GET['data'])) {
+  $id_userz = $_GET['data'];
+  $sql_k = "SELECT foto, nama, email, level, username FROM `user` WHERE `id_user` = '$id_userz'";
+  $query_k = mysqli_query($koneksi, $sql_k);
+  while ($data_k = mysqli_fetch_row($query_k)) {
+    $foto = $data_k[0];
+    $nama = $data_k[1];
+    $email = $data_k[2];
+    $level = $data_k[3];
+    $username = $data_k[4];
+  }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,23 +61,23 @@
                       </tr>                      
                       <tr>
                         <td><strong>Foto User<strong></td>
-                        <td><img src="foto/salnan.jpg" class="img-fluid" width="200px;"></td>
+                        <td><img src="foto/<?=$foto?>" class="img-fluid" width="200px;"></td>
                       </tr>               
                       <tr>
                         <td width="20%"><strong>Nama<strong></td>
-                        <td width="80%">Salna Ratih</td>
+                        <td width="80%"><?=$nama?></td>
                       </tr>                 
                       <tr>
                         <td width="20%"><strong>Email<strong></td>
-                        <td width="80%">salnanratih88@gmail.com</td>
+                        <td width="80%"><?=$email?></td>
                       </tr>
                       <tr>
                         <td width="20%"><strong>Level<strong></td>
-                        <td width="80%">Superadmin</td>
+                        <td width="80%"><?=$level?></td>
                       </tr>                 
                       <tr>
                         <td width="20%"><strong>Username<strong></td>
-                        <td width="80%">salnan</td>
+                        <td width="80%"><?=$username?></td>
                       </tr> 
                     </tbody>
                   </table>  
