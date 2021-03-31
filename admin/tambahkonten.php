@@ -1,18 +1,3 @@
-<?php
-session_start();
-include('../koneksi/koneksi.php');
-if (isset($_GET['data'])) {
-  $id_konten = $_GET['data'];
-  $_SESSION['id_konten'] = $id_konten;
-  //get data kategori buku
-  $sql_d = "select `judul`,`isi` from `konten` where `id_konten` = '$id_konten'";
-  $query_d = mysqli_query($koneksi, $sql_d);
-  while ($data_d = mysqli_fetch_row($query_d)) {
-    $judul = $data_d[0];
-    $isi = $data_d[1];
-  }
-}
-?>
 <!DOCTYPE html>
 <html>
 
@@ -33,12 +18,12 @@ if (isset($_GET['data'])) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h3><i class="fas fa-edit"></i> Edit Data Konten</h3>
+              <h3><i class="fas fa-edit"></i> Tambah Data Konten</h3>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="konten.php">Data Konten</a></li>
-                <li class="breadcrumb-item active">Edit Data Konten</li>
+                <li class="breadcrumb-item active">Tambah Data Konten</li>
               </ol>
             </div>
           </div>
@@ -50,7 +35,7 @@ if (isset($_GET['data'])) {
 
         <div class="card card-info">
           <div class="card-header">
-            <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Edit Data Konten</h3>
+            <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Tambah Data Konten</h3>
             <div class="card-tools">
               <a href="konten.php" class="btn btn-sm btn-warning float-right">
                 <i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
@@ -61,25 +46,25 @@ if (isset($_GET['data'])) {
           </br></br>
           <div class="col-sm-10">
             <?php if (!empty($_GET['notif'])) { ?>
-              <?php if ($_GET['notif'] == "editkosong") { ?>
+              <?php if ($_GET['notif'] == "tambahkosong") { ?>
                 <div class="alert alert-danger" role="alert">
                   Maaf data Konten wajib di isi</div>
               <?php } ?>
             <?php } ?>
           </div>
-          <form class="form-horizontal" method="POST" action="konfirmasieditkonten.php">
+          <form class="form-horizontal" method="POST" action="konfirmasitambahkonten.php">
             <div class="card-body">
 
               <div class="form-group row">
                 <label for="judul" class="col-sm-3 col-form-label">Judul</label>
                 <div class="col-sm-7">
-                  <input type="text" class="form-control" name="judul" id="judul" value="<?= $judul ?>">
+                  <input type="text" class="form-control" name="judul" id="judul">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="isi" class="col-sm-3 col-form-label">Isi</label>
                 <div class="col-sm-7">
-                  <textarea class="form-control" name="isi" id="editor1" rows="12"><?= $isi ?></textarea>
+                  <textarea class="form-control" name="isi" id="editor1" rows="12"></textarea>
                 </div>
               </div>
 
