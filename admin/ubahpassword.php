@@ -39,38 +39,49 @@ include("./includes/auth.php");
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form class="form-horizontal">
+      <form class="form-horizontal" method="POST" action="konfirmasieditpassword.php">
         <div class="card-body">
           <h6>
-            <i class="text-blue"><i class="fas fa-info-circle"></i> Silahkan memasukkan password lama dan password baru Anda untuk mengubah password.</i>
+            <?php if (!empty($_GET['notif'])) { ?>
+              <?php if ($_GET['notif'] == "editkosong") { ?>
+                <div class="alert alert-danger" role="alert">
+                  Maaf password wajib di isi</div>
+              <?php } elseif ($_GET['notif'] == "editsalah") { ?>
+                <div class="alert alert-danger" role="alert">
+                  Maaf password lama salah</div>
+              <?php } elseif ($_GET['notif'] == "editberhasil") { ?>
+                <div class="alert alert-success" role="alert">
+                  Berhasil mengganti password</div>
+              <?php } ?>
+            <?php } else { ?>
+              <i class="text-blue"><i class="fas fa-info-circle"></i> Silahkan memasukkan password lama dan password baru Anda untuk mengubah password.</i>
+            <?php } ?>
           </h6><br>
           
           <div class="form-group row">
             <label for="pass_lama" class="col-sm-3 col-form-label">Password Lama</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="pass_lama" value="">
-              <!--<span class="text-danger">Mohon maaf, password lama wajib diisi.</span>-->
+              <input type="text" class="form-control" id="pass_lama" name="pass_lama" value="">
             </div>
           </div>
           <div class="form-group row">
             <label for="pass_baru" class="col-sm-3 col-form-label">Password Baru</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="pass_baru" value="">
-              <!--<span class="text-danger">Mohon maaf, password baru wajib diisi.</span>-->
+              <input type="text" class="form-control" id="pass_baru" name="pass_baru" value="">
             </div>
           </div>
           <div class="form-group row">
             <label for="konfirmasi" class="col-sm-3 col-form-label">Konfirmasi Password Baru</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="konfirmasi" value="">
-              <span class="text-danger">Mohon maaf, konfirmasi password baru wajib diisi.</span>
+              <input type="text" class="form-control" id="konfirmasi" name="konfirmasi" value="">
+              <span id="validator-output"></span>
             </div>
           </div>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
           <div class="col-sm-10">
-            <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Simpan</button>
+            <button type="submit" id="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Simpan</button>
           </div>  
         </div>
         <!-- /.card-footer -->
@@ -88,5 +99,33 @@ include("./includes/auth.php");
 <!-- ./wrapper -->
 
 <?php include("includes/script.php") ?>
+<script>
+$(function () {
+  $("#validator-output").realtimePasswordValidator({
+    debug: true,
+    input1: $("#pass_baru"),
+    input2: $("#konfirmasi"),
+    validators: [
+      {
+        regexp: ".{8,}",
+        message: "Minimum 8 karakter"
+      },
+      {
+        compare: true,
+        message: "Password konfirmasi harus sama"
+      }
+    ],
+    ok: function (instance) {
+      console.log("ok");
+
+      $("#submit").removeAttr("disabled");
+    },
+    ko: function (instance) {
+      console.log("ko");
+      $("#submit").attr("disabled", "");
+    }
+  });
+});
+</script>
 </body>
 </html>
