@@ -1,10 +1,10 @@
 <?php
 session_start();
+include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 $id_user = $_SESSION['id_user'];
 //get profil
 $sql = "select `nama`, `email`,`foto` from `user` where `id_user`='$id_user'";
-//echo $sql;
 $query = mysqli_query($koneksi, $sql);
 while ($data = mysqli_fetch_row($query)) {
   $nama = $data[0];
@@ -54,7 +54,12 @@ while ($data = mysqli_fetch_row($query)) {
           <!-- /.card-header -->
           <div class="card-body">
             <div class="col-sm-12">
-              <div class="alert alert-success" role="alert">Data Berhasil Diubah</div>
+              <?php if (!empty($_GET['notif'])) { ?>
+                <?php if ($_GET['notif'] == "editberhasil") { ?>
+                  <div class="alert alert-success" role="alert">
+                    Data Berhasil Diubah</div>
+                <?php } ?>
+              <?php } ?>
             </div>
             <table class="table table-bordered">
               <tbody>

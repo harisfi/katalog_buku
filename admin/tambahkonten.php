@@ -1,6 +1,3 @@
-<?php
-include("../koneksi/koneksi.php");
-?>
 <!DOCTYPE html>
 <html>
 
@@ -21,12 +18,12 @@ include("../koneksi/koneksi.php");
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h3><i class="fas fa-plus"></i> Tambah Blog</h3>
+              <h3><i class="fas fa-edit"></i> Tambah Data Konten</h3>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="blog.php">Data Blog</a></li>
-                <li class="breadcrumb-item active">Tambah Blog</li>
+                <li class="breadcrumb-item"><a href="konten.php">Data Konten</a></li>
+                <li class="breadcrumb-item active">Tambah Data Konten</li>
               </ol>
             </div>
           </div>
@@ -38,9 +35,9 @@ include("../koneksi/koneksi.php");
 
         <div class="card card-info">
           <div class="card-header">
-            <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Tambah Data Blog</h3>
+            <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Tambah Data Konten</h3>
             <div class="card-tools">
-              <a href="blog.php" class="btn btn-sm btn-warning float-right">
+              <a href="konten.php" class="btn btn-sm btn-warning float-right">
                 <i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
             </div>
           </div>
@@ -51,33 +48,17 @@ include("../koneksi/koneksi.php");
             <?php if (!empty($_GET['notif'])) { ?>
               <?php if ($_GET['notif'] == "tambahkosong") { ?>
                 <div class="alert alert-danger" role="alert">
-                  Maaf data Blog wajib di isi</div>
+                  Maaf data Konten wajib di isi</div>
               <?php } ?>
             <?php } ?>
           </div>
-          <form class="form-horizontal" method="POST" action="konfirmasitambahblog.php">
+          <form class="form-horizontal" method="POST" action="konfirmasitambahkonten.php">
             <div class="card-body">
-              <div class="form-group row">
-                <label for="kategori" class="col-sm-3 col-form-label">Kategori Blog</label>
-                <div class="col-sm-7">
-                  <select class="custom-select" id="kategori" name="kategori">
-                    <option value="0">- Pilih Kategori -</option>
-                    <?php
-                    $sql_k = "SELECT * FROM kategori_blog";
-                    $query_k = mysqli_query($koneksi, $sql_k);
-                    while ($data_k = mysqli_fetch_row($query_k)) {
-                      $id_kategori = $data_k[0];
-                      $kategori = $data_k[1];
-                    ?>
-                      <option value="<?= $id_kategori ?>"><?= $kategori ?></option>
-                    <?php } ?>
-                  </select>
-                </div>
-              </div>
+
               <div class="form-group row">
                 <label for="judul" class="col-sm-3 col-form-label">Judul</label>
                 <div class="col-sm-7">
-                  <input type="text" class="form-control" name="judul" id="judul" value="">
+                  <input type="text" class="form-control" name="judul" id="judul">
                 </div>
               </div>
               <div class="form-group row">
@@ -94,7 +75,7 @@ include("../koneksi/koneksi.php");
     <!-- /.card-body -->
     <div class="card-footer">
       <div class="col-sm-12">
-        <button type="submit" class="btn btn-info float-right"><i class="fas fa-plus"></i> Tambah</button>
+        <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Simpan</button>
       </div>
     </div>
     <!-- /.card-footer -->
