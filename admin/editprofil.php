@@ -3,11 +3,12 @@ include('../koneksi/koneksi.php');
 session_start();
 if (isset($_SESSION['id_user'])) {
   $id_user = $_SESSION['id_user'];
-  $sql_d = "select `nama`, `email` from `user` where `id_user` = '$id_user'";
+  $sql_d = "select `nama`, `email`,`foto` from `user` where `id_user` = '$id_user'";
   $query_d = mysqli_query($koneksi, $sql_d);
   while ($data_d = mysqli_fetch_row($query_d)) {
     $nama = $data_d[0];
     $email = $data_d[1];
+    $foto = $data_d[2];
   }
 }
 ?>
@@ -57,7 +58,7 @@ if (isset($_SESSION['id_user'])) {
           <!-- form start -->
           </br>
           <div class="col-sm-10">
-            <?php if ((!empty($_GET['notif'])) && (!empty($_GET['jenis']))) { ?>
+            <?php if ((!empty($_GET['notif']))) { ?>
               <?php if ($_GET['notif'] == "editkosong") { ?>
                 <div class="alert alert-danger" role="alert">Maaf data
                   <?= $_GET['jenis']?> wajib di isi</div>
@@ -75,7 +76,7 @@ if (isset($_SESSION['id_user'])) {
                 <div class="col-sm-7">
                   <div class="custom-file">
                     <input type="file" class="custom-file-input" name="foto" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+                    <label class="custom-file-label" for="customFile"><?=$foto?></label>
                   </div>
                 </div>
               </div>
