@@ -2,6 +2,12 @@
 session_start();
 include("./includes/auth.php");
 include('../koneksi/koneksi.php');
+include("./components/libs.php");
+
+use components\libs as l;
+
+$notif = new l\Notifikasi();
+
 if (isset($_SESSION['id_user'])) {
   $id_user = $_SESSION['id_user'];
   $sql_d = "select `nama`, `email`,`foto` from `user` where `id_user` = '$id_user'";
@@ -58,13 +64,10 @@ if (isset($_SESSION['id_user'])) {
           <!-- /.card-header -->
           <!-- form start -->
           </br>
-          <div class="col-sm-10">
-            <?php if ((!empty($_GET['notif']))) { ?>
-              <?php if ($_GET['notif'] == "editkosong") { ?>
-                <div class="alert alert-danger" role="alert">Maaf data
-                  <?= $_GET['jenis']?> wajib di isi</div>
-              <?php } ?>
-            <?php } ?>
+          <div class="col-sm-10 mt-2">
+            <?php if (!empty($_GET['notif'])) {
+              $notif->generate($_GET['notif']);
+            } ?>
           </div>
           <form class="form-horizontal" method="POST" action="konfirmasieditprofil.php" enctype="multipart/form-data">
             <div class="card-body">

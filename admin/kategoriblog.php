@@ -1,6 +1,13 @@
 <?php
 include("./includes/auth.php");
 include('../koneksi/koneksi.php');
+include("./components/libs.php");
+
+use components\libs as l;
+
+$notif = new l\Notifikasi();
+$pagination = new l\Pagination();
+
 if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
   if ($_GET['aksi'] == 'hapus') {
     $id_kategori_blog = $_GET['data'];
@@ -67,18 +74,9 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
               </form>
             </div><br>
             <div class="col-sm-12">
-              <?php if (!empty($_GET['notif'])) { ?>
-                <?php if ($_GET['notif'] == "tambahberhasil") { ?>
-                  <div class="alert alert-success" role="alert">
-                    Data Berhasil Ditambahkan</div>
-                <?php } else if ($_GET['notif'] == "editberhasil") { ?>
-                  <div class="alert alert-success" role="alert">
-                    Data Berhasil Diubah</div>
-                <?php } else if ($_GET['notif'] == "hapusberhasil") { ?>
-                  <div class="alert alert-success" role="alert">
-                    Data Berhasil Dihapus</div>
-                <?php } ?>
-              <?php } ?>
+              <?php if (!empty($_GET['notif'])) {
+                $notif->generate($_GET['notif']);
+              } ?>
             </div>
             <table class="table table-bordered">
               <thead>
@@ -106,8 +104,9 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
                   $katakunci = $_GET['katakunci'];
                   $sql_k .= " WHERE kategori_blog LIKE '%$katakunci%'";
                 }
-                $sql_k .= " ORDER BY `kategori_blog` LIMIT $posisi, $batas";
-                $query_k = mysqli_query($koneksi, $sql_k);
+                $sql_k .= " ORDER BY `kategori_blog`";
+                $sql_q = $sql_k . " LIMIT $posisi, $batas";
+                $query_k = mysqli_query($koneksi, $sql_q);
                 $no = $posisi+1;
                 while ($data_k = mysqli_fetch_row($query_k)) {
                   $id_kategori_blog = $data_k[0];
@@ -134,55 +133,8 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
             $query_jum = mysqli_query($koneksi, $sql_jum);
             $jum_data = mysqli_num_rows($query_jum);
             $jum_halaman = ceil($jum_data / $batas);
+            $pagination->generate(basename($_SERVER['PHP_SELF']), $jum_halaman, $halaman, isset($_GET['katakunci']) ? $_GET['katakunci'] : NULL);
             ?>
-            <ul class="pagination pagination-sm m-0 float-right">
-              <?php
-              if ($jum_halaman == 1) {
-                echo "<li class='page-item active'><span class='page-link'>1</span></li>";
-              } elseif ($jum_halaman > 1) {
-                $sebelum = $halaman - 1;
-                $setelah = $halaman + 1;
-                if (isset($_GET['katakunci'])) {
-                  $katakunci = $_GET['katakunci'];
-                  if ($halaman != 1) {
-                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?katakunci=$katakunci&halaman=1'>First</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?katakunci=$katakunci&halaman=$sebelum'>&laquo;</a></li>";
-                  }
-                  for ($i = 1; $i <= $jum_halaman; $i++) {
-                    if ($i > $halaman - 5 && $i < $halaman + 5) {
-                      if ($i != $halaman) {
-                        echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?katakunci=$katakunci&halaman=$i'>$i</a></li>";
-                      } else {
-                        echo "<li class='page-item active'><span class='page-link'>$i</span></li>";
-                      }
-                    }
-                  }
-                  if ($halaman != $jum_halaman) {
-                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?katakunci=$katakunci&halaman=$setelah'>&raquo;</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?katakunci=$katakunci&halaman=$jum_halaman'>Last</a></li>";
-                  }
-                } else {
-                  if ($halaman != 1) {
-                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=1'>First</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$sebelum'>&laquo;</a></li>";
-                  }
-                  for ($i = 1; $i <= $jum_halaman; $i++) {
-                    if ($i > $halaman - 5 && $i < $halaman + 5) {
-                      if ($i != $halaman) {
-                        echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$i'>$i</a></li>";
-                      } else {
-                        echo "<li class='page-item active'><span class='page-link'>$i</span></li>";
-                      }
-                    }
-                  }
-                  if ($halaman != $jum_halaman) {
-                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$setelah'>&raquo;</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$jum_halaman'>Last</a></li>";
-                  }
-                }
-              }
-              ?>
-            </ul>
           </div>
         </div>
         <!-- /.card -->

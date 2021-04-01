@@ -2,6 +2,12 @@
 session_start();
 include("./includes/auth.php");
 include('../koneksi/koneksi.php');
+include("./components/libs.php");
+
+use components\libs as l;
+
+$notif = new l\Notifikasi();
+
 if (isset($_GET['data'])) {
   $id_penerbit = $_GET['data'];
   $_SESSION['id_penerbit'] = $id_penerbit;
@@ -60,13 +66,10 @@ if (isset($_GET['data'])) {
           <!-- /.card-header -->
           <!-- form start -->
           </br>
-          <div class="col-sm-10">
-            <?php if (!empty($_GET['notif'])) { ?>
-              <?php if ($_GET['notif'] == "editkosong") { ?>
-                <div class="alert alert-danger" role="alert">
-                  Maaf data Penerbit wajib di isi</div>
-              <?php } ?>
-            <?php } ?>
+          <div class="col-sm-10 mt-2">
+            <?php if (!empty($_GET['notif'])) {
+              $notif->generate($_GET['notif']);
+            } ?>
           </div>
           <form class="form-horizontal" method="POST" action="konfirmasieditpenerbit.php">
             <div class="card-body">

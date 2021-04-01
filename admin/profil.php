@@ -2,6 +2,12 @@
 session_start();
 include("./includes/auth.php");
 include('../koneksi/koneksi.php');
+include("./components/libs.php");
+
+use components\libs as l;
+
+$notif = new l\Notifikasi();
+
 $id_user = $_SESSION['id_user'];
 //get profil
 $sql = "select `nama`, `email`,`foto` from `user` where `id_user`='$id_user'";
@@ -54,12 +60,9 @@ while ($data = mysqli_fetch_row($query)) {
           <!-- /.card-header -->
           <div class="card-body">
             <div class="col-sm-12">
-              <?php if (!empty($_GET['notif'])) { ?>
-                <?php if ($_GET['notif'] == "editberhasil") { ?>
-                  <div class="alert alert-success" role="alert">
-                    Data Berhasil Diubah</div>
-                <?php } ?>
-              <?php } ?>
+              <?php if (!empty($_GET['notif'])) {
+                $notif->generate($_GET['notif']);
+              } ?>
             </div>
             <table class="table table-bordered">
               <tbody>
