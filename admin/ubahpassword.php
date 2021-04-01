@@ -63,19 +63,19 @@ include("./includes/auth.php");
               <div class="form-group row">
                 <label for="pass_lama" class="col-sm-3 col-form-label">Password Lama</label>
                 <div class="col-sm-7">
-                  <input type="text" class="form-control" id="pass_lama" name="pass_lama" value="">
+                  <input type="password" class="form-control" id="pass_lama" name="pass_lama" value="" autocomplete="current-password">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="pass_baru" class="col-sm-3 col-form-label">Password Baru</label>
                 <div class="col-sm-7">
-                  <input type="text" class="form-control" id="pass_baru" name="pass_baru" value="">
+                  <input type="password" class="form-control" id="pass_baru" name="pass_baru" value="" autocomplete="new-password">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="konfirmasi" class="col-sm-3 col-form-label">Konfirmasi Password Baru</label>
                 <div class="col-sm-7">
-                  <input type="text" class="form-control" id="konfirmasi" name="konfirmasi" value="">
+                  <input type="password" class="form-control" id="konfirmasi" name="konfirmasi" value="" autocomplete="new-password">
                   <span id="validator-output"></span>
                 </div>
               </div>

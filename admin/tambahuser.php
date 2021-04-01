@@ -90,15 +90,15 @@ $notif = new l\Notifikasi();
               <div class="form-group row">
                 <label for="password" class="col-sm-3 col-form-label">Password</label>
                 <div class="col-sm-7">
-                  <input type="text" class="form-control" name="password" id="password" value="">
+                  <input type="password" class="form-control" name="password" id="password" value="">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="level" class="col-sm-3 col-form-label">Level</label>
                 <div class="col-sm-7">
                   <select class="custom-select" id="level" name="level">
-                    <option value="superadmin">superadmin</option>
-                    <option value="admin">admin</option>
+                    <option value="Superadmin">Superadmin</option>
+                    <option value="Admin">Admin</option>
                   </select>
                 </div>
               </div>

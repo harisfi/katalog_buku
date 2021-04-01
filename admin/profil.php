@@ -71,7 +71,7 @@ while ($data = mysqli_fetch_row($query)) {
                 </tr>
                 <tr>
                   <td width="20%"><strong>Foto<strong></td>
-                  <td width="80%"><img src="foto/<?=$foto?>" class="img-fluid" width="200px;"></td>
+                  <td width="80%"><img src="foto/<?=$foto?>" class="img-fluid img-rounded shadow" width="200px;" loading="lazy"></td>
                 </tr>
                 <tr>
                   <td width="20%"><strong>Nama<strong></td>

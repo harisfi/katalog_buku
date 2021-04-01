@@ -41,12 +41,10 @@ include("./includes/auth.php");
               </div>
             </div>
           </div>
-          <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control" placeholder="Password" />
+          <div class="input-group mb-3" id="showHidePassword">
+            <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="current-password" />
             <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
+                <a href="" class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
             </div>
           </div>
           <div class="row">

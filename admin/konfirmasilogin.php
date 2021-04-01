@@ -1,5 +1,5 @@
 <?php
-//akses file koneksi database
+include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 if (isset($_POST['login'])) {
     $user = $_POST['username'];
@@ -24,6 +24,7 @@ if (isset($_POST['login'])) {
             $level = $data[1]; //speradmin
             $_SESSION['id_user'] = $id_user;
             $_SESSION['level'] = $level;
+            $_SESSION['first'] = true;
             header("Location:profil.php");
         }
     }
