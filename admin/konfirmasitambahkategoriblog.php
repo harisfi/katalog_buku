@@ -1,4 +1,5 @@
 <?php
+include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 $kategori_blog = $_POST['kategori_blog'];
 if (empty($kategori_blog)) {

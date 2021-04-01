@@ -1,4 +1,5 @@
 <?php
+include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 $penerbit = $_POST['penerbit'];
 $alamat = $_POST['alamat'];

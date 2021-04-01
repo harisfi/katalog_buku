@@ -1,4 +1,5 @@
 <?php
+include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 $tag = $_POST['tag'];
 if (empty($tag)) {

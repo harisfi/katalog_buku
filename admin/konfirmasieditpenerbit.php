@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 if (isset($_SESSION['id_penerbit'])) {
     $id_penerbit = $_SESSION['id_penerbit'];
