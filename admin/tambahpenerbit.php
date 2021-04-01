@@ -1,5 +1,9 @@
 <?php
 include("./includes/auth.php");
+include("./components/libs.php");
+
+use components\libs as l;
+$notif = new l\Notifikasi();
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,13 +50,10 @@ include("./includes/auth.php");
           <!-- /.card-header -->
           <!-- form start -->
           </br>
-          <div class="col-sm-10">
-            <?php if (!empty($_GET['notif'])) { ?>
-              <?php if ($_GET['notif'] == "tambahkosong") { ?>
-                <div class="alert alert-danger" role="alert">
-                  Maaf data penerbit wajib di isi</div>
-              <?php } ?>
-            <?php } ?>
+          <div class="col-sm-10 mt-2">
+            <?php if (!empty($_GET['notif'])) {
+              $notif->generate($_GET['notif']);
+            } ?>
           </div>
           <form class="form-horizontal" method="POST" action="konfirmasitambahpenerbit.php">
             <div class="card-body">
