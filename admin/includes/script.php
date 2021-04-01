@@ -47,3 +47,42 @@
 </script>
 <!-- realtimePasswordValidator -->
 <script src="plugins/realtimePasswordValidator.js"></script>
+
+<!-- eye password -->
+<script>
+$(document).ready(function() {
+    $("#showHidePassword a").on('click', function(event) {
+        event.preventDefault();
+        if($('#showHidePassword input').attr("type") == "text"){
+            $('#showHidePassword input').attr('type', 'password');
+            $('#showHidePassword i').addClass( "fa-eye-slash" );
+            $('#showHidePassword i').removeClass( "fa-eye" );
+        }else if($('#showHidePassword input').attr("type") == "password"){
+            $('#showHidePassword input').attr('type', 'text');
+            $('#showHidePassword i').removeClass( "fa-eye-slash" );
+            $('#showHidePassword i').addClass( "fa-eye" );
+        }
+    });
+});
+</script>
+
+<?php
+session_start();
+if (basename($_SERVER['PHP_SELF']) == "profil.php" && $_SESSION['first']) {
+  $_SESSION['first'] = false; ?>
+  <!-- party.js -->
+  <script src="plugins/party.min.js"></script>
+  <script>
+  let siteColors = ['#ffa68d', '#fd3a84'];
+  $(document).ready(function () {
+      party.screen({
+          color: siteColors,
+          size: party.minmax(6, 12),
+          count: party.variation(300 * (window.innerWidth / 1980), 0.4),
+          angle: -180,
+          spread: 80,
+          angularVelocity: party.minmax(6, 9)
+      });
+  });
+  </script>
+<?php } ?>
