@@ -130,7 +130,7 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
           <div class="card-footer clearfix">
             <?php
             //hitung jumlah semua data
-            $sql_jum = "select * from `kategori_blog`";
+            $sql_jum = $sql_k;
             $query_jum = mysqli_query($koneksi, $sql_jum);
             $jum_data = mysqli_num_rows($query_jum);
             $jum_halaman = ceil($jum_data / $batas);
@@ -142,20 +142,43 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
               } elseif ($jum_halaman > 1) {
                 $sebelum = $halaman - 1;
                 $setelah = $halaman + 1;
-                if ($halaman != 1) {
-                  echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=1'>First</a></li>";
-                  echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$sebelum'>&laquo;</a></li>";
-                }
-                for ($i = 1; $i <= $jum_halaman; $i++) {
-                  if ($i != $halaman) {
-                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$i'>$i</a></li>";
-                  } else {
-                    echo "<li class='page-item active'><span class='page-link'>$i</span></li>";
+                if (isset($_GET['katakunci'])) {
+                  $katakunci = $_GET['katakunci'];
+                  if ($halaman != 1) {
+                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?katakunci=$katakunci&halaman=1'>First</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?katakunci=$katakunci&halaman=$sebelum'>&laquo;</a></li>";
                   }
-                }
-                if ($halaman != $jum_halaman) {
-                  echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$setelah'>&raquo;</a></li>";
-                  echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$jum_halaman'>Last</a></li>";
+                  for ($i = 1; $i <= $jum_halaman; $i++) {
+                    if ($i > $halaman - 5 && $i < $halaman + 5) {
+                      if ($i != $halaman) {
+                        echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?katakunci=$katakunci&halaman=$i'>$i</a></li>";
+                      } else {
+                        echo "<li class='page-item active'><span class='page-link'>$i</span></li>";
+                      }
+                    }
+                  }
+                  if ($halaman != $jum_halaman) {
+                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?katakunci=$katakunci&halaman=$setelah'>&raquo;</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?katakunci=$katakunci&halaman=$jum_halaman'>Last</a></li>";
+                  }
+                } else {
+                  if ($halaman != 1) {
+                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=1'>First</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$sebelum'>&laquo;</a></li>";
+                  }
+                  for ($i = 1; $i <= $jum_halaman; $i++) {
+                    if ($i > $halaman - 5 && $i < $halaman + 5) {
+                      if ($i != $halaman) {
+                        echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$i'>$i</a></li>";
+                      } else {
+                        echo "<li class='page-item active'><span class='page-link'>$i</span></li>";
+                      }
+                    }
+                  }
+                  if ($halaman != $jum_halaman) {
+                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$setelah'>&raquo;</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='kategoriblog.php?halaman=$jum_halaman'>Last</a></li>";
+                  }
                 }
               }
               ?>
