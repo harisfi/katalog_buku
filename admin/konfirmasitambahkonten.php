@@ -1,4 +1,5 @@
 <?php
+include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 $judul = $_POST['judul'];
 $isi = $_POST['isi'];
