@@ -72,7 +72,7 @@ $notif = new l\Notifikasi();
                 <label for="kategori" class="col-sm-3 col-form-label">Kategori Buku</label>
                 <div class="col-sm-7">
                   <select class="custom-select" id="kategori" name="kategori">
-                    <option value="0">- Pilih Kategori -</option>
+                    <option value="0" disabled selected>- Pilih Kategori -</option>
                     <?php
                     $sql_k = "SELECT * FROM kategori_buku";
                     $query_k = mysqli_query($koneksi, $sql_k);
@@ -101,7 +101,7 @@ $notif = new l\Notifikasi();
                 <label for="kategori" class="col-sm-3 col-form-label">Penerbit</label>
                 <div class="col-sm-7">
                   <select class="custom-select" id="kategori" name="penerbit">
-                    <option value="0">- Pilih penerbit -</option>
+                    <option value="0" disabled selected>- Pilih penerbit -</option>
                     <?php
                     $sql_k = "SELECT id_penerbit, penerbit FROM penerbit";
                     $query_k = mysqli_query($koneksi, $sql_k);
