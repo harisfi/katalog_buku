@@ -63,7 +63,7 @@ $notif = new l\Notifikasi();
                 <label for="kategori" class="col-sm-3 col-form-label">Kategori Blog</label>
                 <div class="col-sm-7">
                   <select class="custom-select" id="kategori" name="kategori">
-                    <option value="0">- Pilih Kategori -</option>
+                    <option value="0" disabled selected>- Pilih Kategori -</option>
                     <?php
                     $sql_k = "SELECT * FROM kategori_blog";
                     $query_k = mysqli_query($koneksi, $sql_k);
