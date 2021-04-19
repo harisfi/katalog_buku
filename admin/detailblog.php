@@ -3,7 +3,7 @@ include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 if (isset($_GET['data'])) {
   $id_blog = $_GET['data'];
-  $sql_k = "SELECT tanggal, (SELECT kategori_blog FROM kategori_blog WHERE id_kategori_blog = blog.id_kategori_blog), judul, (SELECT nama FROM user WHERE id_user = blog.id_user), isi FROM `blog` WHERE `id_blog` = '$id_blog'";
+  $sql_k = "SELECT b.tanggal, k.kategori_blog, b.judul, u.nama, b.isi FROM blog b JOIN kategori_blog k ON b.id_kategori_blog=k.id_kategori_blog JOIN user u ON b.id_user=u.id_user WHERE id_blog = '$id_blog'";
   $query_k = mysqli_query($koneksi, $sql_k);
   while ($data_k = mysqli_fetch_row($query_k)) {
     $tanggal = $data_k[0];
@@ -12,6 +12,8 @@ if (isset($_GET['data'])) {
     $penulis = $data_k[3];
     $isi = $data_k[4];
   }
+} else {
+  header("Location:blog.php");
 }
 ?>
 <!DOCTYPE html>

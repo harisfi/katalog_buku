@@ -11,14 +11,16 @@ $notif = new l\Notifikasi();
 if (isset($_GET['data'])) {
   $id_blog = $_GET['data'];
   $_SESSION['id_blog'] = $id_blog;
-  //get data kategori buku
-  $sql_d = "select (select kategori_blog from kategori_blog where id_kategori_blog = blog.id_kategori_blog), `judul`,`isi` from `blog` where `id_blog` = '$id_blog'";
+  //get data kategori blog
+  $sql_d = "SELECT k.kategori_blog, b.judul, b.isi FROM blog b JOIN kategori_blog k ON b.id_kategori_blog=k.id_kategori_blog WHERE id_blog = '$id_blog'";
   $query_d = mysqli_query($koneksi, $sql_d);
   while ($data_d = mysqli_fetch_row($query_d)) {
     $kategori = $data_d[0];
     $judul = $data_d[1];
     $isi = $data_d[2];
   }
+} else {
+  header("Location:blog.php");
 }
 ?>
 <!DOCTYPE html>

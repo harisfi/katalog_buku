@@ -11,13 +11,15 @@ $notif = new l\Notifikasi();
 if (isset($_GET['data'])) {
   $id_konten = $_GET['data'];
   $_SESSION['id_konten'] = $id_konten;
-  //get data kategori buku
-  $sql_d = "select `judul`,`isi` from `konten` where `id_konten` = '$id_konten'";
+  //get data konten
+  $sql_d = "SELECT judul, isi FROM konten WHERE id_konten = '$id_konten'";
   $query_d = mysqli_query($koneksi, $sql_d);
   while ($data_d = mysqli_fetch_row($query_d)) {
     $judul = $data_d[0];
     $isi = $data_d[1];
   }
+} else {
+  header("Location:konten.php");
 }
 ?>
 <!DOCTYPE html>

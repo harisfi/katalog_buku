@@ -11,12 +11,12 @@ if (isset($_SESSION['id_buku'])) {
     $tahun = $_POST['tahun'];
     $sinopsis = $_POST['sinopsis'];
     $tag = $_POST['tag'];
-    echo "aaaaaaaaaaaaaaaa";
+
     if (empty($kategori) || empty($judul) || empty($pengarang) || empty($penerbit) || empty($tahun) || empty($sinopsis) || empty($tag)) {
         header("Location:editbuku.php?notif=editkosong");
     } else {
         if (empty($_FILES['cover'])) {
-            $sql = "update `buku` set `id_kategori_buku`='$kategori',`judul`='$judul',`pengarang`='$pengarang',`id_penerbit`='$penerbit',`tahun_terbit`='$tahun',`sinopsis`='$sinopsis' where `id_buku`='$id_buku'";
+            $sql = "UPDATE buku SET id_kategori_buku='$kategori', judul='$judul', pengarang='$pengarang', id_penerbit='$penerbit', tahun_terbit='$tahun', sinopsis='$sinopsis' WHERE id_buku='$id_buku'";
         } else {
             $source = $_FILES['cover']['tmp_name'];
             $filename = $_FILES['cover']['name'];
@@ -24,9 +24,9 @@ if (isset($_SESSION['id_buku'])) {
             $newname = uniqid().'-'.time().'.'.$ext;
             $dest = 'cover/'.$newname;
             if (move_uploaded_file($source, $dest)) {
-                $sql = "update `buku` set `id_kategori_buku`='$kategori',`judul`='$judul',`pengarang`='$pengarang',`id_penerbit`='$penerbit',`tahun_terbit`='$tahun',`sinopsis`='$sinopsis',`cover`='$newname' where `id_buku`='$id_buku'";
+                $sql = "UPDATE buku SET id_kategori_buku='$kategori', judul='$judul', pengarang='$pengarang', id_penerbit='$penerbit', tahun_terbit='$tahun', sinopsis='$sinopsis', cover='$newname' WHERE id_buku='$id_buku'";
             } else {
-                $sql = "update `buku` set `id_kategori_buku`='$kategori',`judul`='$judul',`pengarang`='$pengarang',`id_penerbit`='$penerbit',`tahun_terbit`='$tahun',`sinopsis`='$sinopsis' where `id_buku`='$id_buku'";
+                $sql = "UPDATE buku SET id_kategori_buku='$kategori', judul='$judul', pengarang='$pengarang', id_penerbit='$penerbit', tahun_terbit='$tahun', sinopsis='$sinopsis' WHERE id_buku='$id_buku'";
             }
         }
         mysqli_query($koneksi, $sql);
@@ -36,7 +36,7 @@ if (isset($_SESSION['id_buku'])) {
 
         for ($i=0; $i < sizeof($tag); $i++) { 
             $tagnow = $tag[$i];
-            $sql = "INSERT INTO tag_buku(`id_buku`, `id_tag`) VALUES('$id_buku', '$tagnow')";
+            $sql = "INSERT INTO tag_buku(id_buku, id_tag) VALUES('$id_buku', '$tagnow')";
             mysqli_query($koneksi, $sql);
         }
         

@@ -12,7 +12,7 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
   if ($_GET['aksi'] == 'hapus') {
     $id_blog = $_GET['data'];
     //hapus kategori blog
-    $sql_dh = "delete from `blog` where `id_blog` = '$id_blog'";
+    $sql_dh = "DELETE FROM blog WHERE id_blog = '$id_blog'";
     mysqli_query($koneksi, $sql_dh);
   }
 }
@@ -100,13 +100,12 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
                   $posisi = ($halaman - 1) * $batas;
                 }
 
-                $sql_kategori = "SELECT kategori_blog FROM kategori_blog WHERE id_kategori_blog = blog.id_kategori_blog";
-                $sql_k = "SELECT id_blog, ($sql_kategori), judul, tanggal FROM blog";
+                $sql_k = "SELECT b.id_blog, k.kategori_blog, b.judul, b.tanggal FROM blog b JOIN kategori_blog k ON b.id_kategori_blog=k.id_kategori_blog";
                 if (isset($_GET['katakunci'])) {
                   $katakunci = $_GET['katakunci'];
-                  $sql_k .= " WHERE ($sql_kategori) LIKE '%$katakunci%' OR judul LIKE '%$katakunci%' OR tanggal LIKE '%$katakunci%'";
+                  $sql_k .= " WHERE k.kategori_blog LIKE '%$katakunci%' OR b.judul LIKE '%$katakunci%' OR b.tanggal LIKE '%$katakunci%'";
                 }
-                $sql_k .= " ORDER BY ($sql_kategori)";
+                $sql_k .= " ORDER BY k.kategori_blog";
                 $sql_q = $sql_k . " LIMIT $posisi, $batas";
                 $query_k = mysqli_query($koneksi, $sql_q);
                 $no = $posisi+1;

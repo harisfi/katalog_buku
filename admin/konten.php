@@ -12,7 +12,7 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
   if ($_GET['aksi'] == 'hapus') {
     $id_konten = $_GET['data'];
     //hapus kategori konten
-    $sql_dh = "delete from `konten` where `id_konten` = '$id_konten'";
+    $sql_dh = "DELETE FROM konten WHERE id_konten = '$id_konten'";
     mysqli_query($koneksi, $sql_dh);
   }
 }
@@ -99,12 +99,12 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
                   $posisi = ($halaman - 1) * $batas;
                 }
 
-                $sql_k = "SELECT `id_konten`,`judul`,`tanggal` FROM `konten`";
+                $sql_k = "SELECT id_konten, judul, tanggal FROM konten";
                 if (isset($_GET['katakunci'])) {
                   $katakunci = $_GET['katakunci'];
                   $sql_k .= " WHERE judul LIKE '%$katakunci%'";
                 }
-                $sql_k .= " ORDER BY `judul`";
+                $sql_k .= " ORDER BY judul";
                 $sql_q = $sql_k . " LIMIT $posisi, $batas";
                 $query_k = mysqli_query($koneksi, $sql_q);
                 $no = $posisi+1;

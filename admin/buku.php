@@ -11,8 +11,11 @@ $pagination = new l\Pagination();
 if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
   if ($_GET['aksi'] == 'hapus') {
     $id_buku = $_GET['data'];
-    //hapus kategori buku
-    $sql_dh = "delete from `buku` where `id_buku` = '$id_buku'";
+    //hapus tag buku
+    $sql_dt = "DELETE FROM tag_buku WHERE id_buku = '$id_buku'";
+    mysqli_query($koneksi, $sql_dt);
+    //hapus buku
+    $sql_dh = "DELETE FROM buku WHERE id_buku = '$id_buku'";
     mysqli_query($koneksi, $sql_dh);
   }
 }
@@ -100,14 +103,12 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
                   $posisi = ($halaman - 1) * $batas;
                 }
 
-                $sql_kategori = "SELECT kategori_buku FROM kategori_buku WHERE id_kategori_buku = buku.id_kategori_buku";
-                $sql_penerbit = "SELECT penerbit FROM penerbit WHERE id_penerbit = buku.id_penerbit";
-                $sql_k = "SELECT id_buku, ($sql_kategori), judul, ($sql_penerbit) FROM buku";
+                $sql_k = "SELECT b.id_buku, k.kategori_buku, b.judul, p.penerbit FROM buku b JOIN kategori_buku k ON b.id_kategori_buku = k.id_kategori_buku JOIN penerbit p ON b.id_penerbit = p.id_penerbit";
                 if (isset($_GET['katakunci'])) {
                   $katakunci = $_GET['katakunci'];
-                  $sql_k .= " WHERE ($sql_kategori) LIKE '%$katakunci%' OR judul LIKE '%$katakunci%' OR ($sql_penerbit) LIKE '%$katakunci%'";
+                  $sql_k .= " WHERE k.kategori_buku LIKE '%$katakunci%' OR b.judul LIKE '%$katakunci%' OR p.penerbit LIKE '%$katakunci%'";
                 }
-                $sql_k .= " ORDER BY ($sql_kategori)";
+                $sql_k .= " ORDER BY k.kategori_buku, b.judul";
                 $sql_q = $sql_k . " LIMIT $posisi, $batas";
                 $query_k = mysqli_query($koneksi, $sql_q);
                 $no = $posisi+1;

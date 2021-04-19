@@ -3,7 +3,7 @@ include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 if (isset($_GET['data'])) {
   $id_buku = $_GET['data'];
-  $sql_k = "SELECT `cover`,(SELECT kategori_buku FROM kategori_buku WHERE id_kategori_buku = buku.id_kategori_buku),`judul`,`pengarang`,(SELECT penerbit FROM penerbit WHERE id_penerbit = buku.id_penerbit),`tahun_terbit`,`sinopsis` FROM `buku` WHERE `id_buku` = '$id_buku'";
+  $sql_k = "SELECT b.cover, k.kategori_buku, b.judul, b.pengarang, p.penerbit, b.tahun_terbit, b.sinopsis FROM buku b JOIN kategori_buku k ON b.id_kategori_buku=k.id_kategori_buku JOIN penerbit p ON b.id_penerbit=p.id_penerbit WHERE id_buku = '$id_buku'";
   $query_k = mysqli_query($koneksi, $sql_k);
   while ($data_k = mysqli_fetch_row($query_k)) {
     $cover = $data_k[0];
@@ -14,6 +14,8 @@ if (isset($_GET['data'])) {
     $tahun = $data_k[5];
     $sinopsis = $data_k[6];
   }
+} else {
+  header("Location:buku.php");
 }
 ?>
 <!DOCTYPE html>
@@ -91,7 +93,7 @@ if (isset($_GET['data'])) {
                   <td>
                     <ul>
                       <?php
-                      $sql_k = "SELECT (SELECT tag.tag FROM tag WHERE id_tag = tag_buku.id_tag) FROM tag_buku WHERE id_buku = $id_buku";
+                      $sql_k = "SELECT t.tag FROM tag_buku tb JOIN tag t ON tb.id_tag=t.id_tag WHERE id_buku = '$id_buku'";
                       $query_k = mysqli_query($koneksi, $sql_k);
                       while ($data_k = mysqli_fetch_row($query_k)) {
                       ?>

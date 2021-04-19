@@ -3,13 +3,15 @@ include("./includes/auth.php");
 include('../koneksi/koneksi.php');
 if (isset($_GET['data'])) {
   $id_konten = $_GET['data'];
-  $sql_k = "SELECT `judul`,`tanggal`,`isi` FROM `konten` WHERE `id_konten` = '$id_konten'";
+  $sql_k = "SELECT judul, tanggal, isi FROM konten WHERE id_konten = '$id_konten'";
   $query_k = mysqli_query($koneksi, $sql_k);
   while ($data_k = mysqli_fetch_row($query_k)) {
     $judul = $data_k[0];
     $tanggal = $data_k[1];
     $isi = $data_k[2];
   }
+} else {
+  header("Location:konten.php");
 }
 ?>
 <!DOCTYPE html>

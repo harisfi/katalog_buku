@@ -12,7 +12,7 @@ if (isset($_GET['data'])) {
   $id_buku = $_GET['data'];
   $_SESSION['id_buku'] = $id_buku;
 
-  $sql_k = "SELECT `cover`,(SELECT kategori_buku FROM kategori_buku WHERE id_kategori_buku = buku.id_kategori_buku),`judul`,`pengarang`,(SELECT penerbit FROM penerbit WHERE id_penerbit = buku.id_penerbit),`tahun_terbit`,`sinopsis` FROM `buku` WHERE `id_buku` = '$id_buku'";
+  $sql_k = "SELECT cover, id_kategori_buku, judul, pengarang, id_penerbit, tahun_terbit, sinopsis FROM buku WHERE id_buku = '$id_buku'";
   $query_k = mysqli_query($koneksi, $sql_k);
   while ($data_k = mysqli_fetch_row($query_k)) {
     $cover = $data_k[0];
@@ -23,6 +23,8 @@ if (isset($_GET['data'])) {
     $tahun = $data_k[5];
     $sinopsis = $data_k[6];
   }
+} else {
+  header("Location:buku.php");
 }
 ?>
 <!DOCTYPE html>
@@ -99,7 +101,7 @@ if (isset($_GET['data'])) {
                       $id_kategori = $data_k[0];
                       $kategori = $data_k[1];
                     ?>
-                      <option value="<?= $id_kategori ?>" <?php if ($kategori == $kategori_) echo "selected"; ?>><?= $kategori ?></option>
+                      <option value="<?= $id_kategori ?>" <?php if ($id_kategori == $kategori_) echo "selected"; ?>><?= $kategori ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -128,7 +130,7 @@ if (isset($_GET['data'])) {
                       $id_penerbit = $data_k[0];
                       $penerbit = $data_k[1];
                     ?>
-                      <option value="<?= $id_penerbit ?>" <?php if ($penerbit == $penerbit_) echo "selected"; ?>><?= $penerbit ?></option>
+                      <option value="<?= $id_penerbit ?>" <?php if ($id_penerbit == $penerbit_) echo "selected"; ?>><?= $penerbit ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -164,7 +166,7 @@ if (isset($_GET['data'])) {
                       <div class="form-check col-4">
                         <input class="form-check-input" type="checkbox" name="tag[]" id="<?= $id_tag ?>" value="<?= $id_tag ?>"
                           <?php
-                           $sql_l = "SELECT (SELECT tag.id_tag FROM tag WHERE id_tag = tag_buku.id_tag) FROM tag_buku WHERE id_buku = $id_buku";
+                           $sql_l = "SELECT t.id_tag FROM tag_buku tb JOIN tag t ON tb.id_tag=t.id_tag WHERE id_buku = '$id_buku'";
                            $query_l = mysqli_query($koneksi, $sql_l);
                            while ($data_l = mysqli_fetch_row($query_l)) {
                              if ($id_tag == $data_l[0]) {
