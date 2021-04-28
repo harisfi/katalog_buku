@@ -1,14 +1,11 @@
 <?php
-session_start();
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
 if (isset($_SESSION['id_user'])) {
     $id_user = $_SESSION['id_user'];
     $nama = $_POST['nama'];
     $email = $_POST['email'];
 
     if (empty($nama) || empty($email)) {
-        header("Location:editprofil.php?notif=editkosong");
+        header("Location:index.php?include=edit-profil&notif=editkosong");
     } else {
         if (empty($_FILES['foto'])) {
             $sql = "update `user` set `nama`='$nama',`email`='$email' where `id_user`='$id_user'";
@@ -26,6 +23,6 @@ if (isset($_SESSION['id_user'])) {
         }
         
         mysqli_query($koneksi, $sql);
-        header("Location:profil.php?notif=editberhasil");
+        header("Location:index.php?include=profil&notif=editberhasil");
     }
 }

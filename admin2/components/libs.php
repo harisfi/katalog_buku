@@ -41,39 +41,39 @@ class Pagination
             $setelah = $halaman + 1;
             if (!empty($katakunci)) {
                 if ($halaman != 1) {
-                    echo "<li class='page-item'><a class='page-link' href='$sekarang?katakunci=$katakunci&halaman=1'>First</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='$sekarang?katakunci=$katakunci&halaman=$sebelum'>&laquo;</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='$sekarang&katakunci=$katakunci&halaman=1'>First</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='$sekarang&katakunci=$katakunci&halaman=$sebelum'>&laquo;</a></li>";
                 }
                 for ($i = 1; $i <= $jum_halaman; $i++) {
                     if ($i > $halaman - 5 && $i < $halaman + 5) {
                         if ($i != $halaman) {
-                            echo "<li class='page-item'><a class='page-link' href='$sekarang?katakunci=$katakunci&halaman=$i'>$i</a></li>";
+                            echo "<li class='page-item'><a class='page-link' href='$sekarang&katakunci=$katakunci&halaman=$i'>$i</a></li>";
                         } else {
                             echo "<li class='page-item active'><span class='page-link'>$i</span></li>";
                         }
                     }
                 }
                 if ($halaman != $jum_halaman) {
-                    echo "<li class='page-item'><a class='page-link' href='$sekarang?katakunci=$katakunci&halaman=$setelah'>&raquo;</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='$sekarang?katakunci=$katakunci&halaman=$jum_halaman'>Last</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='$sekarang&katakunci=$katakunci&halaman=$setelah'>&raquo;</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='$sekarang&katakunci=$katakunci&halaman=$jum_halaman'>Last</a></li>";
                 }
             } else {
                 if ($halaman != 1) {
-                    echo "<li class='page-item'><a class='page-link' href='$sekarang?halaman=1'>First</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='$sekarang?halaman=$sebelum'>&laquo;</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='$sekarang&halaman=1'>First</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='$sekarang&halaman=$sebelum'>&laquo;</a></li>";
                 }
                 for ($i = 1; $i <= $jum_halaman; $i++) {
                     if ($i > $halaman - 5 && $i < $halaman + 5) {
                         if ($i != $halaman) {
-                            echo "<li class='page-item'><a class='page-link' href='$sekarang?halaman=$i'>$i</a></li>";
+                            echo "<li class='page-item'><a class='page-link' href='$sekarang&halaman=$i'>$i</a></li>";
                         } else {
                             echo "<li class='page-item active'><span class='page-link'>$i</span></li>";
                         }
                     }
                 }
                 if ($halaman != $jum_halaman) {
-                    echo "<li class='page-item'><a class='page-link' href='$sekarang?halaman=$setelah'>&raquo;</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='$sekarang?halaman=$jum_halaman'>Last</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='$sekarang&halaman=$setelah'>&raquo;</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='$sekarang&halaman=$jum_halaman'>Last</a></li>";
                 }
             }
         }

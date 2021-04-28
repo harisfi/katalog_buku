@@ -1,13 +1,4 @@
 <?php
-session_start();
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
-include("./components/libs.php");
-
-use components\libs as l;
-
-$notif = new l\Notifikasi();
-
 if (isset($_SESSION['id_user'])) {
   $id_user = $_SESSION['id_user'];
   $sql_d = "select `nama`, `email`,`foto` from `user` where `id_user` = '$id_user'";
@@ -19,17 +10,9 @@ if (isset($_SESSION['id_user'])) {
   }
 }
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <?php include("includes/head.php") ?>
-</head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <?php include("includes/header.php") ?>
-
     <?php include("includes/sidebar.php") ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -43,7 +26,7 @@ if (isset($_SESSION['id_user'])) {
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="profil.php">Profil</a></li>
+                <li class="breadcrumb-item"><a href="index.php?include=profil">Profil</a></li>
                 <li class="breadcrumb-item active">Edit Profil</li>
               </ol>
             </div>
@@ -58,7 +41,7 @@ if (isset($_SESSION['id_user'])) {
           <div class="card-header">
             <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Edit Profil</h3>
             <div class="card-tools">
-              <a href="profil.php" class="btn btn-sm btn-warning float-right"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
+              <a href="index.php?include=profil" class="btn btn-sm btn-warning float-right"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
             </div>
           </div>
           <!-- /.card-header -->
@@ -69,7 +52,7 @@ if (isset($_SESSION['id_user'])) {
               $notif->generate($_GET['notif']);
             } ?>
           </div>
-          <form class="form-horizontal" method="POST" action="konfirmasieditprofil.php" enctype="multipart/form-data">
+          <form class="form-horizontal" method="POST" action="index.php?include=konfirmasi-edit-profil" enctype="multipart/form-data">
             <div class="card-body">
               <div class="form-group row">
                 <label for="foto" class="col-sm-12 col-form-label"><span class="text-info">
@@ -119,5 +102,3 @@ if (isset($_SESSION['id_user'])) {
 
   <?php include("includes/script.php") ?>
 </body>
-
-</html>

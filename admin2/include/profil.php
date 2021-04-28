@@ -1,13 +1,4 @@
 <?php
-session_start();
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
-include("./components/libs.php");
-
-use components\libs as l;
-
-$notif = new l\Notifikasi();
-
 $id_user = $_SESSION['id_user'];
 //get profil
 $sql = "select `nama`, `email`,`foto` from `user` where `id_user`='$id_user'";
@@ -18,17 +9,9 @@ while ($data = mysqli_fetch_row($query)) {
   $foto = $data[2];
 }
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <?php include("includes/head.php") ?>
-</head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <?php include("includes/header.php") ?>
-
     <?php include("includes/sidebar.php") ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -54,7 +37,7 @@ while ($data = mysqli_fetch_row($query)) {
         <div class="card">
           <div class="card-header">
             <div class="card-tools">
-              <a href="editprofil.php" class="btn btn-sm btn-info float-right"><i class="fas fa-edit"></i> Edit Profil</a>
+              <a href="index.php?include=edit-profil" class="btn btn-sm btn-info float-right"><i class="fas fa-edit"></i> Edit Profil</a>
             </div>
           </div>
           <!-- /.card-header -->
@@ -100,5 +83,3 @@ while ($data = mysqli_fetch_row($query)) {
 
   <?php include("includes/script.php") ?>
 </body>
-
-</html>

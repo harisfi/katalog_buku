@@ -1,13 +1,4 @@
 <?php
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
-include("./components/libs.php");
-
-use components\libs as l;
-
-$notif = new l\Notifikasi();
-$pagination = new l\Pagination();
-
 if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
   if ($_GET['aksi'] == 'hapus') {
     $id_kategori_buku = $_GET['data'];
@@ -17,17 +8,9 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
   }
 }
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <?php include("includes/head.php") ?>
-</head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <?php include("includes/header.php") ?>
-
     <?php include("includes/sidebar.php") ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -54,13 +37,13 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
           <div class="card-header">
             <h3 class="card-title" style="margin-top:5px;"><i class="fas fa-list-ul"></i> Daftar Kategori Buku</h3>
             <div class="card-tools">
-              <a href="tambahkategoribuku.php" class="btn btn-sm btn-info float-right"><i class="fas fa-plus"></i> Tambah Kategori Buku</a>
+              <a href="index.php?include=tambah-kategori-buku" class="btn btn-sm btn-info float-right"><i class="fas fa-plus"></i> Tambah Kategori Buku</a>
             </div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
             <div class="col-md-12">
-              <form method="GET">
+              <form method="GET" action="index.php?include=kategori-buku">
                 <div class="row">
                   <div class="col-md-4 bottom-10">
                     <input type="text" class="form-control" id="kata_kunci" name="katakunci" value="<?= (isset($_GET['katakunci'])) ? $_GET['katakunci'] : '' ?>">
@@ -114,8 +97,8 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
                     <td><?php echo $no; ?></td>
                     <td><?php echo $kategori_buku; ?></td>
                     <td align="center">
-                      <a href="editkategoribuku.php?data=<?= $id_kategori_buku ?>" class="btn btn-xs btn-info"><i class="fas fa-edit"></i> Edit</a>
-                      <a href="javascript:if(confirm('Anda yakin ingin menghapus data <?= $kategori_buku ?>?'))window.location.href = 'kategoribuku.php?aksi=hapus&data=<?= $id_kategori_buku ?>&notif=hapusberhasil'" class="btn btn-xs btn-warning"><i class="fas fa-trash"></i>Hapus</a>
+                      <a href="index.php?include=edit-kategori-buku&data=<?= $id_kategori_buku ?>" class="btn btn-xs btn-info"><i class="fas fa-edit"></i> Edit</a>
+                      <a href="javascript:if(confirm('Anda yakin ingin menghapus data <?= $kategori_buku ?>?'))window.location.href = 'index.php?include=kategori-buku&aksi=hapus&data=<?= $id_kategori_buku ?>&notif=hapusberhasil'" class="btn btn-xs btn-warning"><i class="fas fa-trash"></i>Hapus</a>
                     </td>
                   </tr>
                 <?php $no++;
@@ -131,7 +114,7 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
             $query_jum = mysqli_query($koneksi, $sql_jum);
             $jum_data = mysqli_num_rows($query_jum);
             $jum_halaman = ceil($jum_data / $batas);
-            $pagination->generate(basename($_SERVER['PHP_SELF']), $jum_halaman, $halaman, isset($_GET['katakunci']) ? $_GET['katakunci'] : NULL);
+            $pagination->generate("index.php?include=$include", $jum_halaman, $halaman, isset($_GET['katakunci']) ? $_GET['katakunci'] : NULL);
             ?>
           </div>
         </div>
@@ -148,5 +131,3 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
 
   <?php include("includes/script.php") ?>
 </body>
-
-</html>

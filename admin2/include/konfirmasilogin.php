@@ -1,6 +1,4 @@
 <?php
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
 if (isset($_POST['login'])) {
     $user = $_POST['username'];
     $pass = $_POST['password'];
@@ -11,11 +9,11 @@ if (isset($_POST['login'])) {
     $query = mysqli_query($koneksi, $sql);
     $jumlah = mysqli_num_rows($query);
     if (empty($user)) {
-        header("Location:index.php?gagal=userKosong");
+        header("Location:index.php?include=login&gagal=userKosong");
     } else if (empty($pass)) {
-        header("Location:index.php?gagal=passKosong");
+        header("Location:index.php?include=login&gagal=passKosong");
     } else if ($jumlah == 0) {
-        header("Location:index.php?gagal=userpassSalah");
+        header("Location:index.php?include=login&gagal=userpassSalah");
     } else {
         session_start();
         //get data
@@ -25,7 +23,7 @@ if (isset($_POST['login'])) {
             $_SESSION['id_user'] = $id_user;
             $_SESSION['level'] = $level;
             $_SESSION['first'] = true;
-            header("Location:profil.php");
+            header("Location:index.php?include=profil");
         }
     }
 }
