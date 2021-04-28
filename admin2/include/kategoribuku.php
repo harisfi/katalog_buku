@@ -7,6 +7,12 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
     mysqli_query($koneksi, $sql_dh);
   }
 }
+
+if (isset($_POST['katakunci'])) {
+  $katakunci = $_POST['katakunci'];
+} elseif (isset($_GET['katakunci'])) {
+  $katakunci = $_GET['katakunci'];
+}
 ?>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
@@ -43,10 +49,10 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
           <!-- /.card-header -->
           <div class="card-body">
             <div class="col-md-12">
-              <form method="GET" action="index.php?include=kategori-buku">
+              <form method="POST" action="index.php?include=kategori-buku">
                 <div class="row">
                   <div class="col-md-4 bottom-10">
-                    <input type="text" class="form-control" id="kata_kunci" name="katakunci" value="<?= (isset($_GET['katakunci'])) ? $_GET['katakunci'] : '' ?>">
+                    <input type="text" class="form-control" id="kata_kunci" name="katakunci" value="<?= (isset($katakunci)) ? $katakunci : '' ?>">
                   </div>
                   <div class="col-md-5 bottom-10">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>&nbsp; Search</button>
@@ -81,8 +87,7 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
                 }
 
                 $sql_k = "SELECT `id_kategori_buku`,`kategori_buku` FROM `kategori_buku`";
-                if (isset($_GET['katakunci'])) {
-                  $katakunci = $_GET['katakunci'];
+                if (isset($katakunci)) {
                   $sql_k .= " WHERE kategori_buku LIKE '%$katakunci%'";
                 }
                 $sql_k .= " ORDER BY `kategori_buku`";
@@ -114,7 +119,7 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
             $query_jum = mysqli_query($koneksi, $sql_jum);
             $jum_data = mysqli_num_rows($query_jum);
             $jum_halaman = ceil($jum_data / $batas);
-            $pagination->generate("index.php?include=$include", $jum_halaman, $halaman, isset($_GET['katakunci']) ? $_GET['katakunci'] : NULL);
+            $pagination->generate("index.php?include=$include", $jum_halaman, $halaman, isset($katakunci) ? $katakunci : NULL);
             ?>
           </div>
         </div>
