@@ -1,13 +1,4 @@
 <?php
-session_start();
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
-include("./components/libs.php");
-
-use components\libs as l;
-
-$notif = new l\Notifikasi();
-
 if (isset($_GET['data'])) {
   $id_tag = $_GET['data'];
   $_SESSION['id_tag'] = $id_tag;
@@ -19,13 +10,6 @@ if (isset($_GET['data'])) {
   }
 }
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <?php include("includes/head.php") ?>
-</head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <?php include("includes/header.php") ?>
@@ -43,7 +27,7 @@ if (isset($_GET['data'])) {
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="katgoribuku.php">Tag</a></li>
+                <li class="breadcrumb-item"><a href="index.php?include=tag">Tag</a></li>
                 <li class="breadcrumb-item active">Edit Tag</li>
               </ol>
             </div>
@@ -58,7 +42,7 @@ if (isset($_GET['data'])) {
           <div class="card-header">
             <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Edit Tag</h3>
             <div class="card-tools">
-              <a href="tag.php" class="btn btn-sm btn-warning float-right"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
+              <a href="index.php?include=tag" class="btn btn-sm btn-warning float-right"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
             </div>
           </div>
           <!-- /.card-header -->
@@ -69,7 +53,7 @@ if (isset($_GET['data'])) {
               $notif->generate($_GET['notif']);
             } ?>
           </div>
-          <form class="form-horizontal" method="POST" action="konfirmasiedittag.php">
+          <form class="form-horizontal" method="POST" action="index.php?include=konfirmasi-edit-tag">
             <div class="card-body">
               <div class="form-group row">
                 <label for="Tag" class="col-sm-3 col-form-label">Tag</label>
@@ -100,5 +84,3 @@ if (isset($_GET['data'])) {
 
   <?php include("includes/script.php") ?>
 </body>
-
-</html>

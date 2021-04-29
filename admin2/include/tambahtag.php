@@ -1,21 +1,6 @@
-<?php
-include("./includes/auth.php");
-include("./components/libs.php");
-
-use components\libs as l;
-$notif = new l\Notifikasi();
-?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <?php include("includes/head.php") ?>
-</head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <?php include("includes/header.php") ?>
-
     <?php include("includes/sidebar.php") ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -29,7 +14,7 @@ $notif = new l\Notifikasi();
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="tag.php">Tag</a></li>
+                <li class="breadcrumb-item"><a href="index.php?include=tag">Tag</a></li>
                 <li class="breadcrumb-item active">Tambah Tag</li>
               </ol>
             </div>
@@ -44,7 +29,7 @@ $notif = new l\Notifikasi();
           <div class="card-header">
             <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Tambah Tag</h3>
             <div class="card-tools">
-              <a href="tag.php" class="btn btn-sm btn-warning float-right"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
+              <a href="index.php?include=tag" class="btn btn-sm btn-warning float-right"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
             </div>
           </div>
           <!-- /.card-header -->
@@ -55,7 +40,7 @@ $notif = new l\Notifikasi();
               $notif->generate($_GET['notif']);
             } ?>
           </div>
-          <form class="form-horizontal" method="POST" action="konfirmasitambahtag.php">
+          <form class="form-horizontal" method="POST" action="index.php?include=konfirmasi-tambah-tag">
             <div class="card-body">
               <div class="form-group row">
                 <label for="tag" class="col-sm-3 col-form-label">Tag</label>
@@ -86,5 +71,3 @@ $notif = new l\Notifikasi();
 
   <?php include("includes/script.php") ?>
 </body>
-
-</html>
