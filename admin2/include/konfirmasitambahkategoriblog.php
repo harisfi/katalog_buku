@@ -1,12 +1,10 @@
 <?php
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
 $kategori_blog = $_POST['kategori_blog'];
 if (empty($kategori_blog)) {
-    header("Location:tambahkategoriblog.php?notif=tambahkosong");
+    header("Location:index.php?include=tambah-kategori-blog&notif=tambahkosong");
 } else {
     $sql = "insert into `kategori_blog` (`kategori_blog`)
 values ('$kategori_blog')";
     mysqli_query($koneksi, $sql);
-    header("Location:kategoriblog.php?notif=tambahberhasil");
+    header("Location:index.php?include=kategori-blog&notif=tambahberhasil");
 }
