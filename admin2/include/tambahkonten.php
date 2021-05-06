@@ -1,21 +1,6 @@
-<?php
-include("./includes/auth.php");
-include("./components/libs.php");
-
-use components\libs as l;
-$notif = new l\Notifikasi();
-?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <?php include("includes/head.php") ?>
-</head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <?php include("includes/header.php") ?>
-
     <?php include("includes/sidebar.php") ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -25,12 +10,12 @@ $notif = new l\Notifikasi();
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h3><i class="fas fa-edit"></i> Tambah Data Konten</h3>
+              <h3><i class="fas fa-edit"></i> Tambah Konten</h3>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="konten.php">Data Konten</a></li>
-                <li class="breadcrumb-item active">Tambah Data Konten</li>
+                <li class="breadcrumb-item"><a href="index.php?include=konten">Konten</a></li>
+                <li class="breadcrumb-item active">Tambah Konten</li>
               </ol>
             </div>
           </div>
@@ -42,9 +27,9 @@ $notif = new l\Notifikasi();
 
         <div class="card card-info">
           <div class="card-header">
-            <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Tambah Data Konten</h3>
+            <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Tambah Konten</h3>
             <div class="card-tools">
-              <a href="konten.php" class="btn btn-sm btn-warning float-right">
+              <a href="index.php?include=konten" class="btn btn-sm btn-warning float-right">
                 <i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
             </div>
           </div>
@@ -56,7 +41,7 @@ $notif = new l\Notifikasi();
               $notif->generate($_GET['notif']);
             } ?>
           </div>
-          <form class="form-horizontal" method="POST" action="konfirmasitambahkonten.php">
+          <form class="form-horizontal" method="POST" action="index.php?include=konfirmasi-tambah-konten">
             <div class="card-body">
 
               <div class="form-group row">
@@ -98,5 +83,3 @@ $notif = new l\Notifikasi();
 
   <?php include("includes/script.php") ?>
 </body>
-
-</html>
