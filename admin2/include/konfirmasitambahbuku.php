@@ -1,7 +1,4 @@
 <?php
-session_start();
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
 if (isset($_SESSION['id_user'])) {
     $id_user = $_SESSION['id_user'];
     $kategori = $_POST['kategori'];
@@ -13,7 +10,7 @@ if (isset($_SESSION['id_user'])) {
     $tag = $_POST['tag'];
 
     if (empty($kategori) || empty($judul) || empty($pengarang) || empty($penerbit) || empty($tahun) || empty($sinopsis) || empty($tag)) {
-        header("Location:tambahbuku.php?notif=tambahkosong");
+        header("Location:index.php?include=tambah-buku&notif=tambahkosong");
     } else {
         $source = $_FILES['cover']['tmp_name'];
         $filename = $_FILES['cover']['name'];
@@ -38,6 +35,6 @@ if (isset($_SESSION['id_user'])) {
             $sql = "INSERT INTO tag_buku(`id_buku`, `id_tag`) VALUES('$id_buku', '$tagnow')";
             mysqli_query($koneksi, $sql);
         }
-        header("Location:buku.php?notif=tambahberhasil");
+        header("Location:index.php?include=buku&notif=tambahberhasil");
     }
 }

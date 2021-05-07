@@ -1,7 +1,4 @@
 <?php
-session_start();
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
 if (isset($_SESSION['id_buku'])) {
     $id_buku = $_SESSION['id_buku'];
     $kategori = $_POST['kategori'];
@@ -13,7 +10,7 @@ if (isset($_SESSION['id_buku'])) {
     $tag = $_POST['tag'];
 
     if (empty($kategori) || empty($judul) || empty($pengarang) || empty($penerbit) || empty($tahun) || empty($sinopsis) || empty($tag)) {
-        header("Location:editbuku.php?notif=editkosong");
+        header("Location:index.php?include=edit-buku&notif=editkosong");
     } else {
         if (empty($_FILES['cover'])) {
             $sql = "UPDATE buku SET id_kategori_buku='$kategori', judul='$judul', pengarang='$pengarang', id_penerbit='$penerbit', tahun_terbit='$tahun', sinopsis='$sinopsis' WHERE id_buku='$id_buku'";
@@ -40,6 +37,6 @@ if (isset($_SESSION['id_buku'])) {
             mysqli_query($koneksi, $sql);
         }
         
-        header("Location:buku.php?notif=editberhasil");
+        header("Location:index.php?include=buku&notif=editberhasil");
     }
 }
