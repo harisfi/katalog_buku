@@ -13,7 +13,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="index.php?include=profil" class="nav-link <?= ($include == 'profil' || !isset($include)) ? $ac : '' ?>">
+          <a href="index.php" class="nav-link <?= ($include == 'profil' || !isset($include)) ? $ac : '' ?>">
             <i class="nav-icon fas fa-user"></i>
             <p>
               Profil
