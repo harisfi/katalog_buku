@@ -1,6 +1,4 @@
 <?php
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
 if (isset($_GET['data'])) {
   $id_userz = $_GET['data'];
   $sql_k = "SELECT foto, nama, email, level, username FROM `user` WHERE `id_user` = '$id_userz'";
@@ -14,17 +12,9 @@ if (isset($_GET['data'])) {
   }
 }
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <?php include("includes/head.php") ?>
-</head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <?php include("includes/header.php") ?>
-
     <?php include("includes/sidebar.php") ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,8 +27,8 @@ if (isset($_GET['data'])) {
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="user.php">Data User</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php?include=user">Data User</a></li>
                 <li class="breadcrumb-item active">Detail Data User</li>
               </ol>
             </div>
@@ -51,7 +41,7 @@ if (isset($_GET['data'])) {
         <div class="card">
           <div class="card-header">
             <div class="card-tools">
-              <a href="user.php" class="btn btn-sm btn-warning float-right">
+              <a href="index.php?include=user" class="btn btn-sm btn-warning float-right">
                 <i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
             </div>
           </div>
@@ -101,5 +91,3 @@ if (isset($_GET['data'])) {
 
   <?php include("includes/script.php") ?>
 </body>
-
-</html>

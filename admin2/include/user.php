@@ -1,13 +1,4 @@
 <?php
-include("./includes/auth.php");
-include("../koneksi/koneksi.php");
-include("./components/libs.php");
-
-use components\libs as l;
-
-$notif = new l\Notifikasi();
-$pagination = new l\Pagination();
-
 if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
   if ($_GET['aksi'] == 'hapus') {
     $id_user = $_GET['data'];
@@ -16,18 +7,16 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
     mysqli_query($koneksi, $sql_dh);
   }
 }
+
+if (isset($_POST['katakunci'])) {
+  $katakunci = $_POST['katakunci'];
+} elseif (isset($_GET['katakunci'])) {
+  $katakunci = $_GET['katakunci'];
+}
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <?php include("includes/head.php") ?>
-</head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <?php include("includes/header.php") ?>
-
     <?php include("includes/sidebar.php") ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -54,17 +43,17 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
           <div class="card-header">
             <h3 class="card-title" style="margin-top:5px;"><i class="fas fa-list-ul"></i> Daftar User</h3>
             <div class="card-tools">
-              <a href="tambahuser.php" class="btn btn-sm btn-info float-right">
+              <a href="index.php?include=tambah-user" class="btn btn-sm btn-info float-right">
                 <i class="fas fa-plus"></i> Tambah User</a>
             </div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
             <div class="col-md-12">
-              <form method="" action="">
+              <form method="POST" action="index.php?include=user">
                 <div class="row">
                   <div class="col-md-4 bottom-10">
-                    <input type="text" class="form-control" id="kata_kunci" name="katakunci" value="<?= (isset($_GET['katakunci'])) ? $_GET['katakunci'] : '' ?>">
+                    <input type="text" class="form-control" id="kata_kunci" name="katakunci" value="<?= (isset($katakunci)) ? $katakunci : '' ?>">
                   </div>
                   <div class="col-md-5 bottom-10">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>&nbsp; Search</button>
@@ -101,8 +90,7 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
                 }
 
                 $sql_k = "SELECT id_user, nama, email, level FROM user";
-                if (isset($_GET['katakunci'])) {
-                  $katakunci = $_GET['katakunci'];
+                if (isset($katakunci)) {
                   $sql_k .= " WHERE nama LIKE '%$katakunci%' OR email LIKE '%$katakunci%' OR level LIKE '%$katakunci%'";
                 }
                 $sql_k .= " ORDER BY `level` DESC";
@@ -121,9 +109,9 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
                     <td><?= $email ?></td>
                     <td><?= $level ?></td>
                     <td align="center">
-                      <a href="edituser.php?data=<?= $id_user ?>" class="btn btn-xs btn-info" title="Edit"><i class="fas fa-edit"></i></a>
-                      <a href="detailuser.php?data=<?= $id_user ?>" class="btn btn-xs btn-info" title="Detail"><i class="fas fa-eye"></i></a>
-                      <a href="javascript:if(confirm('Anda yakin ingin menghapus data <?= $nama ?>?'))window.location.href = 'user.php?aksi=hapus&data=<?= $id_user ?>&notif=hapusberhasil'" class="btn btn-xs btn-warning"><i class="fas fa-trash" title="Hapus"></i></a>
+                      <a href="index.php?include=edit-user&data=<?= $id_user ?>" class="btn btn-xs btn-info" title="Edit"><i class="fas fa-edit"></i></a>
+                      <a href="index.php?include=detail-user&data=<?= $id_user ?>" class="btn btn-xs btn-info" title="Detail"><i class="fas fa-eye"></i></a>
+                      <a href="javascript:if(confirm('Anda yakin ingin menghapus data <?= $nama ?>?'))window.location.href = 'index.php?include=user&aksi=hapus&data=<?= $id_user ?>&notif=hapusberhasil'" class="btn btn-xs btn-warning"><i class="fas fa-trash" title="Hapus"></i></a>
                     </td>
                   </tr>
                 <?php $no++;
@@ -139,7 +127,7 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
             $query_jum = mysqli_query($koneksi, $sql_jum);
             $jum_data = mysqli_num_rows($query_jum);
             $jum_halaman = ceil($jum_data / $batas);
-            $pagination->generate(basename($_SERVER['PHP_SELF']), $jum_halaman, $halaman, isset($_GET['katakunci']) ? $_GET['katakunci'] : NULL);
+            $pagination->generate("index.php?include=$include", $jum_halaman, $halaman, isset($katakunci) ? $katakunci : NULL);
             ?>
           </div>
         </div>
@@ -156,5 +144,3 @@ if ((isset($_GET['aksi'])) && (isset($_GET['data']))) {
 
   <?php include("includes/script.php") ?>
 </body>
-
-</html>

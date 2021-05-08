@@ -1,7 +1,4 @@
 <?php
-session_start();
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
 if (isset($_SESSION['id_userz'])) {
     $id_userz = $_SESSION['id_userz'];
     $nama = $_POST['nama'];
@@ -11,7 +8,7 @@ if (isset($_SESSION['id_userz'])) {
     $level = $_POST['level'];
 
     if (empty($nama) || empty($email) || empty($username) || empty($level)) {
-        header("Location:edituser.php?data=" . $id_userz . "&notif=editkosong");
+        header("Location:index.php?include=edit-user&data=" . $id_userz . "&notif=editkosong");
     } else {
         if (empty($_FILES['foto'])) {
             if (empty($password)) {
@@ -46,6 +43,6 @@ if (isset($_SESSION['id_userz'])) {
         
         mysqli_query($koneksi, $sql);
         unset($_SESSION['id_userz']);
-        header("Location:user.php?notif=editberhasil");
+        header("Location:index.php?include=user&notif=editberhasil");
     }
 }
