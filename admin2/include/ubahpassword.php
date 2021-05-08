@@ -1,17 +1,6 @@
-<?php
-include("./includes/auth.php");
-?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <?php include("includes/head.php") ?>
-</head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <?php include("includes/header.php") ?>
-
     <?php include("includes/sidebar.php") ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -41,7 +30,7 @@ include("./includes/auth.php");
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form class="form-horizontal" method="POST" action="konfirmasieditpassword.php">
+          <form class="form-horizontal" method="POST" action="index.php?include=konfirmasi-edit-password">
             <div class="card-body">
               <h6>
                 <?php if (!empty($_GET['notif'])) { ?>
@@ -129,5 +118,3 @@ include("./includes/auth.php");
     });
   </script>
 </body>
-
-</html>
