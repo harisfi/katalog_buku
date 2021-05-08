@@ -73,7 +73,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="index.php?include=buku" class="nav-link <?= ($include == 'index.php?include=buku') ? $ac : '' ?>">
+          <a href="index.php?include=buku" class="nav-link <?= ($include == 'buku') ? $ac : '' ?>">
             <i class="nav-icon fas fa-book"></i>
             <p>
               Buku
