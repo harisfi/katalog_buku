@@ -1,5 +1,3 @@
-<body class="hold-transition login-page">
-  <div class="login-box">
     <div class="login-logo">
       <a href="#"><b>Admin</b>Katalog Buku</a>
     </div>
@@ -52,8 +50,3 @@
       </div>
       <!-- /.login-card-body -->
     </div>
-  </div>
-  <!-- /.login-box -->
-
-  <?php include("includes/script.php") ?>
-</body>
