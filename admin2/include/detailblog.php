@@ -1,6 +1,4 @@
 <?php
-include("./includes/auth.php");
-include('../koneksi/koneksi.php');
 if (isset($_GET['data'])) {
   $id_blog = $_GET['data'];
   $sql_k = "SELECT b.tanggal, k.kategori_blog, b.judul, u.nama, b.isi FROM blog b JOIN kategori_blog k ON b.id_kategori_blog=k.id_kategori_blog JOIN user u ON b.id_user=u.id_user WHERE id_blog = '$id_blog'";
@@ -13,20 +11,12 @@ if (isset($_GET['data'])) {
     $isi = $data_k[4];
   }
 } else {
-  header("Location:blog.php");
+  header("Location:index.php?include=blog");
 }
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <?php include("includes/head.php") ?>
-</head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <?php include("includes/header.php") ?>
-
     <?php include("includes/sidebar.php") ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -40,8 +30,8 @@ if (isset($_GET['data'])) {
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="blog.php">Data Blog</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php?include=blog">Data Blog</a></li>
                 <li class="breadcrumb-item active">Detail Data Blog</li>
               </ol>
             </div>
@@ -54,7 +44,7 @@ if (isset($_GET['data'])) {
         <div class="card">
           <div class="card-header">
             <div class="card-tools">
-              <a href="blog.php" class="btn btn-sm btn-warning float-right">
+              <a href="index.php?include=blog" class="btn btn-sm btn-warning float-right">
                 <i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
             </div>
           </div>
@@ -101,5 +91,3 @@ if (isset($_GET['data'])) {
 
   <?php include("includes/script.php") ?>
 </body>
-
-</html>
