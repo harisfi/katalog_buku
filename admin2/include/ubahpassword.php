@@ -64,7 +64,7 @@
       <!-- /.card-body -->
       <div class="card-footer">
         <div class="col-sm-10">
-          <button type="submit" id="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Simpan</button>
+          <button type="submit" id="submit" class="btn btn-info float-right" disabled><i class="fas fa-save"></i> Simpan</button>
         </div>
       </div>
       <!-- /.card-footer -->
@@ -73,30 +73,3 @@
   <!-- /.card -->
 
 </section>
-<script>
-  $(function() {
-    $("#validator-output").realtimePasswordValidator({
-      debug: true,
-      input1: $("#pass_baru"),
-      input2: $("#konfirmasi"),
-      validators: [{
-          regexp: ".{8,}",
-          message: "Minimum 8 karakter"
-        },
-        {
-          compare: true,
-          message: "Password konfirmasi harus sama"
-        }
-      ],
-      ok: function(instance) {
-        console.log("ok");
-
-        $("#submit").removeAttr("disabled");
-      },
-      ko: function(instance) {
-        console.log("ko");
-        $("#submit").attr("disabled", "");
-      }
-    });
-  });
-</script>

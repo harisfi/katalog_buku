@@ -1,4 +1,3 @@
-
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -24,18 +23,21 @@
 <script>
   // Replace the <textarea id="editor1"> with a CKEditor
   // instance, using default configuration.
-  CKEDITOR.replace( 'editor1',{filebrowserImageBrowseUrl : 'kcfinder'} );
-  CKEDITOR.replace( 'editor2',{filebrowserImageBrowseUrl : 'kcfinder'} );
-
+  CKEDITOR.replace('editor1', {
+    filebrowserImageBrowseUrl: 'kcfinder'
+  });
+  CKEDITOR.replace('editor2', {
+    filebrowserImageBrowseUrl: 'kcfinder'
+  });
 </script>
 <!-- bootstrap datepicker -->
 <script src="datepicker/js/bootstrap-datepicker.js"></script>
 <script>
   //Date picker
   $('#datepicker-year').datepicker({
-		format: "yyyy",
-		orientation: "top auto",
-    viewMode: "years", 
+    format: "yyyy",
+    orientation: "top auto",
+    viewMode: "years",
     minViewMode: "years",
     autoclose: true
   });
@@ -48,41 +50,69 @@
 <!-- realtimePasswordValidator -->
 <script src="plugins/realtimePasswordValidator.js"></script>
 
+<script>
+  $(function() {
+    $("#validator-output").realtimePasswordValidator({
+      debug: true,
+      input1: $("#pass_baru"),
+      input2: $("#konfirmasi"),
+      validators: [{
+          regexp: ".{8,}",
+          message: "Minimum 8 karakter"
+        },
+        {
+          compare: true,
+          message: "Password konfirmasi harus sama"
+        }
+      ],
+      ok: function(instance) {
+        console.log("ok");
+
+        $("#submit").removeAttr("disabled");
+      },
+      ko: function(instance) {
+        console.log("ko");
+        $("#submit").attr("disabled", "");
+      }
+    });
+  });
+</script>
+
 <!-- eye password -->
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
     $("#showHidePassword a").on('click', function(event) {
-        event.preventDefault();
-        if($('#showHidePassword input').attr("type") == "text"){
-            $('#showHidePassword input').attr('type', 'password');
-            $('#showHidePassword i').addClass( "fa-eye-slash" );
-            $('#showHidePassword i').removeClass( "fa-eye" );
-        }else if($('#showHidePassword input').attr("type") == "password"){
-            $('#showHidePassword input').attr('type', 'text');
-            $('#showHidePassword i').removeClass( "fa-eye-slash" );
-            $('#showHidePassword i').addClass( "fa-eye" );
-        }
+      event.preventDefault();
+      if ($('#showHidePassword input').attr("type") == "text") {
+        $('#showHidePassword input').attr('type', 'password');
+        $('#showHidePassword i').addClass("fa-eye-slash");
+        $('#showHidePassword i').removeClass("fa-eye");
+      } else if ($('#showHidePassword input').attr("type") == "password") {
+        $('#showHidePassword input').attr('type', 'text');
+        $('#showHidePassword i').removeClass("fa-eye-slash");
+        $('#showHidePassword i').addClass("fa-eye");
+      }
     });
-});
+  });
 </script>
 
 <?php
-session_start();
-if (basename($_SERVER['PHP_SELF']) == "profil.php" && $_SESSION['first']) {
-  $_SESSION['first'] = false; ?>
+if ($_SESSION['first'] && $_GET['include'] == "profil") { ?>
   <!-- party.js -->
   <script src="plugins/party.min.js"></script>
   <script>
-  let siteColors = ['#ffa68d', '#fd3a84'];
-  $(document).ready(function () {
+    let siteColors = ['#ffa68d', '#fd3a84'];
+    $(document).ready(function() {
       party.screen({
-          color: siteColors,
-          size: party.minmax(6, 12),
-          count: party.variation(300 * (window.innerWidth / 1980), 0.4),
-          angle: -180,
-          spread: 80,
-          angularVelocity: party.minmax(6, 9)
+        color: siteColors,
+        size: party.minmax(6, 12),
+        count: party.variation(300 * (window.innerWidth / 1980), 0.4),
+        angle: -180,
+        spread: 80,
+        angularVelocity: party.minmax(6, 9)
       });
-  });
+    });
   </script>
-<?php } ?>
+<?php
+  $_SESSION['first'] = false;
+} ?>

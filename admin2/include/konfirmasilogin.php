@@ -15,7 +15,6 @@ if (isset($_POST['login'])) {
     } else if ($jumlah == 0) {
         header("Location:index.php?include=login&gagal=userpassSalah");
     } else {
-        session_start();
         //get data
         while ($data = mysqli_fetch_row($query)) {
             $id_user = $data[0]; //1

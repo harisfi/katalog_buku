@@ -1,6 +1,13 @@
 Options +FollowSymLinks -MultiViews
+Options All -Indexes
+
 # Turn mod_rewrite on
 RewriteEngine On
 RewriteBase /
 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1
+
 RewriteRule ^admin/(.*)$ /katalog_buku/admin2/$1 [L,NC,R=302]
+RewriteRule ^admin2/index\.php(.*)$ /katalog_buku/admin2/$1 [L,NC,R=302]
