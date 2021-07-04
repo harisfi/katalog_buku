@@ -1,8 +1,3 @@
-<?php
-session_start();
-$ac = "active";
-$now = basename($_SERVER['PHP_SELF']);
-?>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
@@ -18,7 +13,7 @@ $now = basename($_SERVER['PHP_SELF']);
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="profil.php" class="nav-link <?= ($now == 'profil.php') ? $ac : '' ?>">
+          <a href="index.php" class="nav-link <?= ($include == 'profil' || !isset($include)) ? $ac : '' ?>">
             <i class="nav-icon fas fa-user"></i>
             <p>
               Profil
@@ -27,12 +22,12 @@ $now = basename($_SERVER['PHP_SELF']);
         </li>
         <li class="nav-item has-treeview 
           <?php
-          if ($now == 'kategoribuku.php' || $now == 'tag.php' || $now == 'penerbit.php' || $now == 'kategoriblog.php') {
+          if ($include == 'kategori-buku' || $include == 'tag' || $include == 'penerbit' || $include == 'kategori-blog') {
             echo 'menu-open';
           }
           ?>">
           <a href="#" class="nav-link" <?php
-                                        if ($now == 'kategoribuku.php' || $now == 'tag.php' || $now == 'penerbit.php' || $now == 'kategoriblog.php') {
+                                        if ($include == 'kategori-buku' || $include == 'tag' || $include == 'penerbit' || $include == 'kategori-blog') {
                                           echo "style='display:'block'";
                                         }
                                         ?>>
@@ -44,25 +39,25 @@ $now = basename($_SERVER['PHP_SELF']);
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="kategoribuku.php" class="nav-link <?= ($now == 'kategoribuku.php') ? $ac : '' ?>">
+              <a href="index.php?include=kategori-buku" class="nav-link <?= ($include == 'kategori-buku') ? $ac : '' ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Kategori Buku</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="tag.php" class="nav-link  <?= ($now == 'tag.php') ? $ac : '' ?>">
+              <a href="index.php?include=tag" class="nav-link  <?= ($include == 'tag') ? $ac : '' ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tag</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="penerbit.php" class="nav-link <?= ($now == 'penerbit.php') ? $ac : '' ?>">
+              <a href="index.php?include=penerbit" class="nav-link <?= ($include == 'penerbit') ? $ac : '' ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Penerbit</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="kategoriblog.php" class="nav-link <?= ($now == 'kategoriblog.php') ? $ac : '' ?>">
+              <a href="index.php?include=kategori-blog" class="nav-link <?= ($include == 'kategori-blog') ? $ac : '' ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Kategori Blog</p>
               </a>
@@ -70,7 +65,7 @@ $now = basename($_SERVER['PHP_SELF']);
           </ul>
         </li>
         <li class="nav-item">
-          <a href="konten.php" class="nav-link <?= ($now == 'konten.php') ? $ac : '' ?>">
+          <a href="index.php?include=konten" class="nav-link <?= ($include == 'konten') ? $ac : '' ?>">
             <i class="nav-icon fas fa-file-alt"></i>
             <p>
               Konten
@@ -78,7 +73,7 @@ $now = basename($_SERVER['PHP_SELF']);
           </a>
         </li>
         <li class="nav-item">
-          <a href="buku.php" class="nav-link <?= ($now == 'buku.php') ? $ac : '' ?>">
+          <a href="index.php?include=buku" class="nav-link <?= ($include == 'buku') ? $ac : '' ?>">
             <i class="nav-icon fas fa-book"></i>
             <p>
               Buku
@@ -86,7 +81,7 @@ $now = basename($_SERVER['PHP_SELF']);
           </a>
         </li>
         <li class="nav-item">
-          <a href="blog.php" class="nav-link <?= ($now == 'blog.php') ? $ac : '' ?>">
+          <a href="index.php?include=blog" class="nav-link <?= ($include == 'blog') ? $ac : '' ?>">
             <i class="nav-icon fab fa-blogger"></i>
             <p>
               Blog
@@ -98,7 +93,7 @@ $now = basename($_SERVER['PHP_SELF']);
           if ($_SESSION['level'] == "Superadmin") {
             ?>
             <li class="nav-item">
-              <a href="user.php" class="nav-link <?= ($now == 'user.php') ? $ac : '' ?>">
+              <a href="index.php?include=user" class="nav-link <?= ($include == 'user') ? $ac : '' ?>">
                 <i class="nav-icon fas fa-user-cog"></i>
                 <p>
                   Pengaturan User
@@ -110,7 +105,7 @@ $now = basename($_SERVER['PHP_SELF']);
         }
         ?>
         <li class="nav-item">
-          <a href="ubahpassword.php" class="nav-link <?= ($now == 'ubahpassword.php') ? $ac : '' ?>">
+          <a href="index.php?include=ubah-password" class="nav-link <?= ($include == 'ubah-password') ? $ac : '' ?>">
             <i class="nav-icon fas fa-user-lock"></i>
             <p>
               Ubah Password
@@ -118,7 +113,7 @@ $now = basename($_SERVER['PHP_SELF']);
           </a>
         </li>
         <li class="nav-item">
-          <a href="signout.php" class="nav-link">
+          <a href="index.php?include=signout" class="nav-link">
             <i class="nav-icon fas fa-sign-out-alt"></i>
             <p>
               Sign Out

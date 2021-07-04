@@ -1,5 +1,20 @@
 <?php
-include("./includes/auth.php");
+session_start();
+ob_start();
+include("../koneksi/koneksi.php");
+include("./components/libs.php");
+use components\libs as l;
+
+$notif = new l\Notifikasi();
+$pagination = new l\Pagination();
+
+$ac = "active";
+
+if (isset($_POST['katakunci'])) {
+  $katakunci = $_POST['katakunci'];
+} elseif (isset($_GET['katakunci'])) {
+  $katakunci = $_GET['katakunci'];
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -7,65 +22,84 @@ include("./includes/auth.php");
 <head>
   <?php include("includes/head.php") ?>
 </head>
+  <?php
+  if (isset($_GET["include"])) {
+    $include = $_GET["include"];
+    if (isset($_SESSION["id_user"])) {
+      if ($include == "signout") {
+        session_unset();
+        session_destroy();
+        header("Refresh:0; url=index.php");
+      } else {
+        ?>
+        <body class="hold-transition sidebar-mini layout-fixed">
+          <div class="wrapper">
+            <?php include("includes/header.php") ?>
+            <?php include("includes/sidebar.php") ?>
+            <div class="content-wrapper">
+        <?php
+        $realpg = array("blog", "buku", "konten", "penerbit", "tag", "user", "detail-blog",
+                        "edit-blog", "edit-kategori-blog", "kategori-blog", "konfirmasi-edit-blog",
+                        "konfirmasi-edit-kategori-blog", "konfirmasi-tambah-blog",
+                        "konfirmasi-tambah-kategori-blog", "tambah-blog", "tambah-kategori-blog",
+                        "detail-buku", "edit-buku", "edit-kategori-buku", "kategori-buku",
+                        "konfirmasi-edit-buku", "konfirmasi-edit-kategori-buku",
+                        "konfirmasi-tambah-buku", "konfirmasi-tambah-kategori-buku", "tambah-buku",
+                        "tambah-kategori-buku", "detail-konten", "edit-konten",
+                        "konfirmasi-edit-konten", "konfirmasi-tambah-konten", "tambah-konten",
+                        "edit-penerbit", "konfirmasi-edit-penerbit", "konfirmasi-tambah-penerbit",
+                        "tambah-penerbit", "edit-tag", "konfirmasi-edit-tag", "konfirmasi-tambah-tag",
+                        "tambah-tag", "detail-user", "edit-user", "konfirmasi-edit-user",
+                        "konfirmasi-tambah-user", "tambah-user", "edit-profil",
+                        "konfirmasi-edit-profil", "ubah-password",
+                        "konfirmasi-edit-password");
 
-<body class="hold-transition login-page">
-  <div class="login-box">
-    <div class="login-logo">
-      <a href="#"><b>Admin</b>Katalog Buku</a>
-    </div>
-    <!-- /.login-logo -->
-    <div class="card">
-      <div class="card-body login-card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
-        <?php if (!empty($_GET['gagal'])) { ?>
-          <?php if ($_GET['gagal'] == "userKosong") { ?>
-            <span class="text-danger">
-              Maaf Username Tidak Boleh Kosong
-            </span>
-          <?php } else if ($_GET['gagal'] == "passKosong") { ?>
-            <span class="text-danger">
-              Maaf Password Tidak Boleh Kosong
-            </span>
-          <?php } else { ?>
-            <span class="text-danger">
-              Maaf Username dan Password Anda Salah
-            </span>
-          <?php } ?>
-        <?php } ?>
-        <form action="konfirmasilogin.php" method="post">
-          <div class="input-group mb-3">
-            <input type="text" name="username" class="form-control" placeholder="Username" />
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>
-          <div class="input-group mb-3" id="showHidePassword">
-            <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="current-password" />
-            <div class="input-group-append">
-                <a href="" class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8"></div>
-            <!-- /.col -->
-            <div class="col-4">
-              <button type="submit" name="login" value="login" class="btn btn-primary btn-block">
-                Sign In
-              </button>
-            </div>
-            <!-- /.col -->
-          </div>
-        </form>
-        <!-- /.social-auth-links -->
+        $allval = array_combine($realpg, str_replace("-", "", $realpg));
+        if (in_array($include, $realpg)) {
+          include("include/".$allval[$include].".php");
+        } else {
+          include("include/profil.php");
+        }
+        ?>
+        </div>
+        <?php
+        include("includes/footer.php");
+      }
+    } else {
+      ?>
+      <body class="hold-transition login-page">
+        <div class="login-box">
+      <?php
+      if ($include == "konfirmasi-login") {
+        include("include/konfirmasilogin.php");
+      } else {
+        include("include/login.php");
+      }
+    }
+  } else {
+    if (isset($_SESSION["id_user"])) {
+      ?>
+      <body class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper">
+          <?php include("includes/header.php") ?>
+          <?php include("includes/sidebar.php") ?>
+          <div class="content-wrapper">
+      <?php
+      include("include/profil.php");
+      ?>
       </div>
-      <!-- /.login-card-body -->
+      <?php
+      include("includes/footer.php");
+    } else {
+      ?>
+      <body class="hold-transition login-page">
+        <div class="login-box">
+      <?php
+      include("include/login.php");
+    }
+  }
+  ?>
     </div>
-  </div>
-  <!-- /.login-box -->
-
-  <?php include("includes/script.php") ?>
-</body>
-
+    <?php include("includes/script.php") ?>
+  </body>
 </html>
