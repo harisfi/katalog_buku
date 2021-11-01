@@ -1,0 +1,18 @@
+name: Code Checker
+
+on:
+  push:
+    branches: [ inertia ]
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      with:
+        php-version: '8.0'
+    - uses: actions/checkout@v2
+    - name: Check PHP syntax errors
+      uses: overtrue/phplint@3.0.3
+    - name: PHP Code Style (phpcs)
+      uses: chindit/actions-phpcs@master
