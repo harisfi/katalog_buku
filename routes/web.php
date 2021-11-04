@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\User\ContactUsController;
+use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-});
+// Route::get('/', function () {
+//     return view('app');
+// });
+
+// Route::inertia('/', 'user.index');
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/contact-us', [ContactUsController::class, 'index']);
