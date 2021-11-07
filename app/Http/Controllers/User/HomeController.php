@@ -32,7 +32,7 @@ class HomeController extends Controller
         ])->limit(4)->orderByDesc('tanggal')->get();
         $bookCategories = BookCategory::all('id', 'kategori_buku');
 
-        return inertia('user.home', [
+        return inertia('User.Home', [
             'wTitle' => $wTitle,
             'wContent' => $wContent,
             'books' => $books,

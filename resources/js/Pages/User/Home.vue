@@ -121,8 +121,8 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
-import Navbar from "../../components/user/Navbar.vue";
-import Footer from "../../components/user/Footer.vue";
+import Navbar from "../../Components/User/Navbar.vue";
+import Footer from "../../Components/User/Footer.vue";
 
 export default {
   name: "Home",

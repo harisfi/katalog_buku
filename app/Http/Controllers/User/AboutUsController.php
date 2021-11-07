@@ -17,7 +17,7 @@ class AboutUsController extends Controller
     {
         $bookCategories = BookCategory::all('id', 'kategori_buku');
 
-        return inertia('user.about', [
+        return inertia('User.About', [
             'bookCategories' => $bookCategories
         ]);
     }
