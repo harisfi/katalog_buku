@@ -9,13 +9,13 @@ class Blog extends Model
 {
     use HasFactory;
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function blogCategories()
+    public function blogCategory()
     {
-        return $this->hasMany(BlogCategory::class);
+        return $this->belongsTo(BlogCategory::class);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\AboutUsController;
+use App\Http\Controllers\User\BlogController;
 use App\Http\Controllers\User\ContactUsController;
 use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/contact-us', [ContactUsController::class, 'index']);
 Route::get('/about-us', [AboutUsController::class, 'index']);
+Route::resource('blog', BlogController::class)->only(['index', 'show']);
