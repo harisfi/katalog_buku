@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar :bookCategories="bookCategories" />
+    <Navbar />
     <section id="carousel-item">
       <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -104,7 +104,7 @@
             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
               <div class="col p-4 d-flex flex-column position-static bg-light">
                 <strong class="d-inline-block mb-2 text-success">{{ blog.kategori }}</strong>
-                <Link :href="'/detail-blog/' + blog.id" class="h3 mb-0">{{ blog.judul }}</Link>
+                <Link :href="'/blog/' + blog.id" class="h3 mb-0">{{ blog.judul }}</Link>
                 <div class="mb-1 text-muted">{{ formatDate(blog.tanggal) }}</div>
               </div>
               <div class="col-auto d-none d-lg-block">
@@ -135,8 +135,7 @@ export default {
     wTitle: String,
     wContent: String,
     books: Array,
-    blogs: Array,
-    bookCategories: Array
+    blogs: Array
   },
   methods: {
     formatDate(date) {

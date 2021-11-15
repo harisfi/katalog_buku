@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\BookCategory;
 use Illuminate\Http\Request;
 
-class ContactUsController extends Controller
+class BookCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class ContactUsController extends Controller
      */
     public function index()
     {
-        return inertia('User.Contact');
+        $bookCategories = BookCategory::all('id', 'kategori_buku');
+        return json_encode($bookCategories);
     }
 
     /**

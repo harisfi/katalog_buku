@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Book;
-use App\Models\BookCategory;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 
@@ -30,14 +29,12 @@ class HomeController extends Controller
             ->whereColumn('blog_categories.id', 'blog_category_id')
             ->limit(1)
         ])->limit(4)->orderByDesc('tanggal')->get();
-        $bookCategories = BookCategory::all('id', 'kategori_buku');
 
         return inertia('User.Home', [
             'wTitle' => $wTitle,
             'wContent' => $wContent,
             'books' => $books,
-            'blogs' => $blogs,
-            'bookCategories' => $bookCategories
+            'blogs' => $blogs
         ]);
     }
 

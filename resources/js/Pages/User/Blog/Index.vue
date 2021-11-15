@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar :bookCategories="bookCategories" />
+    <Navbar />
     <section id="blog-header">
       <div class="container">
         <h1 class="text-white">BLOG</h1>
@@ -60,8 +60,7 @@ export default {
   props: {
     blogs: Array,
     blogCategories: Array,
-    blogArchives: Array,
-    bookCategories: Array
+    blogArchives: Array
   },
   methods: {
     formatDate(date) {

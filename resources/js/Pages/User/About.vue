@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar :bookCategories="bookCategories" />
+    <Navbar />
     <section id="blog-header">
       <div class="container">
         <h1 class="text-white">ABOUT US</h1>
@@ -74,10 +74,7 @@ export default {
   components: {
     Navbar,
     Footer
-  },
-  props: {
-    bookCategories: Array
-  },
+  }
 }
 </script>
 

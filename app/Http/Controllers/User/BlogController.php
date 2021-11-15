@@ -5,8 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use App\Models\BookCategory;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -29,13 +27,10 @@ class BlogController extends Controller
             $blogArchives[$k]['tanggal'] = Carbon::parse($v['tanggal'])->format('F Y');
         }
 
-        $bookCategories = BookCategory::all('id', 'kategori_buku');
-
         return inertia('User.Blog.Index', [
             'blogs' => $blogs,
             'blogCategories' => $blogCategories,
-            'blogArchives' => $blogArchives,
-            'bookCategories' => $bookCategories
+            'blogArchives' => $blogArchives
         ]);
     }
 
@@ -74,13 +69,11 @@ class BlogController extends Controller
         foreach ($blogArchives as $k => $v) {
             $blogArchives[$k]['tanggal'] = Carbon::parse($v['tanggal'])->format('F Y');
         }
-        $bookCategories = BookCategory::all('id', 'kategori_buku');
 
         return inertia('User.Blog.Show', [
             'blog' => $blog,
             'blogCategories' => $blogCategories,
-            'blogArchives' => $blogArchives,
-            'bookCategories' => $bookCategories
+            'blogArchives' => $blogArchives
         ]);
     }
 

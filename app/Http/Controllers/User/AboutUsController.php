@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\BookCategory;
 use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
@@ -15,11 +14,7 @@ class AboutUsController extends Controller
      */
     public function index()
     {
-        $bookCategories = BookCategory::all('id', 'kategori_buku');
-
-        return inertia('User.About', [
-            'bookCategories' => $bookCategories
-        ]);
+        return inertia('User.About');
     }
 
     /**
