@@ -17,7 +17,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategori</a>
             <div class="dropdown-menu" aria-labelledby="dropdown07">
-              <Link v-for="cat in bookCategories" :key="cat.id" class="dropdown-item" :href="'/daftar-buku-kategori/' + cat.id">{{ cat.kategori_buku }}</Link>
+              <Link v-for="cat in bookCategories" :key="cat.id" class="dropdown-item" :href="'/book-category/' + cat.id">{{ cat.kategori_buku }}</Link>
             </div>
           </li>
           <li class="nav-item">

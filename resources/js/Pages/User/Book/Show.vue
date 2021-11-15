@@ -69,7 +69,7 @@
                 <h4 class="font-italic">Categories</h4>
                 <ol class="list-unstyled mb-0">
                   <li v-for="c in categories" :key="c.id">
-                    <a :href="'/kategori/' + c.id">{{ c.kategori_buku }}</a>
+                    <a :href="'/book-category/' + c.id">{{ c.kategori_buku }}</a>
                   </li>
                 </ol>
               </div>
