@@ -68,7 +68,7 @@
                 <p class="card-text">{{ book.judul }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <Link :href="'/detail-buku/' + book.id " class="btn btn-primary stretched-link" >Detail</Link>
+                    <Link :href="'/book/' + book.id " class="btn btn-primary stretched-link" >Detail</Link>
                   </div>
                   <small class="text-muted">{{ book.penerbit }}</small>
                 </div>

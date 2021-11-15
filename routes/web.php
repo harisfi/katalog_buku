@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\AboutUsController;
 use App\Http\Controllers\User\BlogController;
+use App\Http\Controllers\User\BookController;
 use App\Http\Controllers\User\ContactUsController;
 use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::inertia('/', 'user.index');
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/book/{id}', [BookController::class, 'show']);
 Route::get('/contact-us', [ContactUsController::class, 'index']);
 Route::get('/about-us', [AboutUsController::class, 'index']);
 Route::resource('blog', BlogController::class)->only(['index', 'show']);
