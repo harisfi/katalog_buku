@@ -40,7 +40,7 @@
                     <td><strong>Tag</strong></td>
                     <td>
                       <span v-for="t in book.tag" :key="book.tag.indexOf(t)">
-                        <a :href="'/kategori/' + t.id">
+                        <a href="#">
                           {{ t.tag }}
                         </a>
                         <span v-if="book.tag.length > 0 && book.tag.indexOf(t) < book.tag.length-1">, </span>
@@ -61,7 +61,7 @@
                 <h4 class="font-italic">Buku Terkait</h4>
                 <ol class="list-unstyled mb-0">
                   <li v-for="r in related" :key="r.id">
-                    <a :href="'/book/' + r.id">{{ r.judul }}</a>
+                    <Link :href="'/book/' + r.id">{{ r.judul }}</Link>
                   </li>
                 </ol>
               </div>
@@ -69,7 +69,7 @@
                 <h4 class="font-italic">Categories</h4>
                 <ol class="list-unstyled mb-0">
                   <li v-for="c in categories" :key="c.id">
-                    <a :href="'/book-category/' + c.id">{{ c.kategori_buku }}</a>
+                    <Link :href="'/book-category/' + c.id">{{ c.kategori_buku }}</Link>
                   </li>
                 </ol>
               </div>
@@ -77,7 +77,7 @@
                 <h4 class="font-italic">Tag</h4>
                 <ol class="list-unstyled">
                   <li v-for="t in tags" :key="t.id">
-                    <a :href="'/tag/' + t.id">{{ t.tag }}</a>
+                    <a href="#">{{ t.tag }}</a>
                   </li>
                 </ol>
               </div>
@@ -90,12 +90,14 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue3';
 import Navbar from "../../../Components/User/Navbar.vue";
 import Footer from "../../../Components/User/Footer.vue";
 
 export default {
   name: 'BookDetail',
   components: {
+    Link,
     Navbar,
     Footer
   },
