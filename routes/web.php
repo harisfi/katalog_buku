@@ -30,3 +30,10 @@ Route::get('/book-category/{id}', [BookCategoryController::class, 'show']);
 Route::get('/contact-us', [ContactUsController::class, 'index']);
 Route::get('/about-us', [AboutUsController::class, 'index']);
 Route::resource('blog', BlogController::class)->only(['index', 'show']);
+
+Route::prefix('admin')->group(function() {
+    Route::prefix('profil')->group(function() {
+        Route::inertia('/', 'Admin.Profil.Index');
+        Route::inertia('/edit', 'Admin.Profil.Edit');
+    });
+});
