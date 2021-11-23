@@ -39,6 +39,7 @@ Route::prefix('admin')->group(function() {
     Route::prefix('master')->group(function() {
         Route::prefix('kategori-buku')->group(function() {
             Route::inertia('/', 'Admin.KategoriBuku.Index');
+            Route::inertia('/create', 'Admin.KategoriBuku.Create');
         });
     });
 });
