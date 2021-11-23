@@ -36,4 +36,9 @@ Route::prefix('admin')->group(function() {
         Route::inertia('/', 'Admin.Profil.Index');
         Route::inertia('/edit', 'Admin.Profil.Edit');
     });
+    Route::prefix('master')->group(function() {
+        Route::prefix('kategori-buku')->group(function() {
+            Route::inertia('/', 'Admin.KategoriBuku.Index');
+        });
+    });
 });

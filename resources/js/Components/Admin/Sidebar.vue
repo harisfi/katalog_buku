@@ -8,15 +8,15 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <Link href="/admin/profil" :class="'nav-link' + (pathNow === '/admin/profil' ? ' active' : '')">
+            <Link href="/admin/profil" :class="'nav-link' + activeMatch(/\/admin\/profil*/g)">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Profil
               </p>
             </Link>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li :class="'nav-item has-treeview' + (matcher(/\/admin\/master*/g) ? ' menu-open' : '')">
+            <a href="#" class="nav-link" :style="matcher(/\/admin\/master*/g) ? 'display: block' : ''">
               <i class="nav-icon fas fa-database"></i>
               <p>
                 Data Master
@@ -25,25 +25,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <Link href="/admin/master/kategori-buku" :class="'nav-link' + (pathNow === '/admin/master/kategori-buku' ? ' active' : '')">
+                <Link href="/admin/master/kategori-buku" :class="'nav-link' + activeMatch(/\/admin\/master\/kategori-buku*/g)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kategori Buku</p>
                 </Link>
               </li>
               <li class="nav-item">
-                <Link href="/admin/master/tag" :class="'nav-link' + (pathNow === '/admin/master/tag' ? ' active' : '')">
+                <Link href="/admin/master/tag" :class="'nav-link' + activeMatch(/\/admin\/master\/tag*/g)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tag</p>
                 </Link>
               </li>
               <li class="nav-item">
-                <Link href="/admin/master/penerbit" :class="'nav-link' + (pathNow === '/admin/master/penerbit' ? ' active' : '')">
+                <Link href="/admin/master/penerbit" :class="'nav-link' + activeMatch(/\/admin\/master\/penerbit*/g)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Penerbit</p>
                 </Link>
               </li>
               <li class="nav-item">
-                <Link href="/admin/master/kategori-blog" :class="'nav-link' + (pathNow === '/admin/master/kategori-blog' ? ' active' : '')">
+                <Link href="/admin/master/kategori-blog" :class="'nav-link' + activeMatch(/\/admin\/master\/kategori-blog*/g)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kategori Blog</p>
                 </Link>
@@ -51,7 +51,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <Link href="/admin/konten" :class="'nav-link' + (pathNow === '/admin/konten' ? ' active' : '')">
+            <Link href="/admin/konten" :class="'nav-link' + activeMatch(/\/admin\/konten*/g)">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Konten
@@ -59,7 +59,7 @@
             </Link>
           </li>
           <li class="nav-item">
-            <Link href="/admin/buku" :class="'nav-link' + (pathNow === '/admin/buku' ? ' active' : '')">
+            <Link href="/admin/buku" :class="'nav-link' + activeMatch(/\/admin\/buku*/g)">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Buku
@@ -67,7 +67,7 @@
             </Link>
           </li>
           <li class="nav-item">
-            <a href="/admin/blog" :class="'nav-link' + (pathNow === '/admin/blog' ? ' active' : '')">
+            <a href="/admin/blog" :class="'nav-link' + activeMatch(/\/admin\/blog*/g)">
               <i class="nav-icon fab fa-blogger"></i>
               <p>
                 Blog
@@ -75,7 +75,7 @@
             </a>
           </li>
           <li v-if="role === 'superadmin'" class="nav-item">
-            <Link href="/admin/user" :class="'nav-link' + (pathNow === '/admin/user' ? ' active' : '')">
+            <Link href="/admin/user" :class="'nav-link' + activeMatch(/\/admin\/user*/g)">
               <i class="nav-icon fas fa-user-cog"></i>
               <p>
                 Pengaturan User
@@ -83,7 +83,7 @@
             </Link>
           </li>
           <li class="nav-item">
-            <Link href="/admin/ubah-password" :class="'nav-link' + (pathNow === '/admin/ubah-password' ? ' active' : '')">
+            <Link href="/admin/ubah-password" :class="'nav-link' + activeMatch(/\/admin\/ganti-password*/g)">
               <i class="nav-icon fas fa-user-lock"></i>
               <p>
                 Ubah Password
@@ -125,6 +125,12 @@ export default {
       const response = await axios(config);
       const data = response.data;
       this.role = data;
+    },
+    matcher(regex) {
+      return this.pathNow.match(regex);
+    },
+    activeMatch(regex) {
+      return this.matcher(regex) ? ' active' : '';
     }
   },
   mounted() {
