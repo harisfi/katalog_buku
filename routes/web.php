@@ -19,11 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('app');
-// });
-
-// Route::inertia('/', 'user.index');
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/book/{id}', [BookController::class, 'show']);
 Route::get('/book-category/{id}', [BookCategoryController::class, 'show']);
@@ -40,6 +35,7 @@ Route::prefix('admin')->group(function() {
         Route::prefix('kategori-buku')->group(function() {
             Route::inertia('/', 'Admin.KategoriBuku.Index');
             Route::inertia('/create', 'Admin.KategoriBuku.Create');
+            Route::inertia('/{id}/edit', 'Admin.KategoriBuku.Edit');
         });
     });
 });
