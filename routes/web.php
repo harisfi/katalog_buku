@@ -43,5 +43,10 @@ Route::prefix('admin')->group(function() {
             Route::inertia('/create', 'Admin.Tag.Create');
             Route::inertia('/{id}/edit', 'Admin.Tag.Edit');
         });
+        Route::prefix('penerbit')->group(function() {
+            Route::inertia('/', 'Admin.Penerbit.Index');
+            Route::inertia('/create', 'Admin.Penerbit.Create');
+            Route::inertia('/{id}/edit', 'Admin.Penerbit.Edit');
+        });
     });
 });
