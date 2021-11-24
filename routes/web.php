@@ -48,5 +48,10 @@ Route::prefix('admin')->group(function() {
             Route::inertia('/create', 'Admin.Penerbit.Create');
             Route::inertia('/{id}/edit', 'Admin.Penerbit.Edit');
         });
+        Route::prefix('kategori-blog')->group(function() {
+            Route::inertia('/', 'Admin.KategoriBlog.Index');
+            Route::inertia('/create', 'Admin.KategoriBlog.Create');
+            Route::inertia('/{id}/edit', 'Admin.KategoriBlog.Edit');
+        });
     });
 });

@@ -21,4 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function() {
     Route::get('/book-categories', [BookCategoryController::class, 'index']);
+    Route::get('/user-role', function() {
+        return 'admin';
+    });
 });
