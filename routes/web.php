@@ -27,6 +27,7 @@ Route::get('/about-us', [AboutUsController::class, 'index']);
 Route::resource('blog', BlogController::class)->only(['index', 'show']);
 
 Route::prefix('admin')->group(function() {
+    Route::redirect('/', '/admin/profil');
     Route::prefix('profil')->group(function() {
         Route::inertia('/', 'Admin.Profil.Index');
         Route::inertia('/edit', 'Admin.Profil.Edit');
@@ -36,6 +37,11 @@ Route::prefix('admin')->group(function() {
             Route::inertia('/', 'Admin.KategoriBuku.Index');
             Route::inertia('/create', 'Admin.KategoriBuku.Create');
             Route::inertia('/{id}/edit', 'Admin.KategoriBuku.Edit');
+        });
+        Route::prefix('tag')->group(function() {
+            Route::inertia('/', 'Admin.Tag.Index');
+            Route::inertia('/create', 'Admin.Tag.Create');
+            Route::inertia('/{id}/edit', 'Admin.Tag.Edit');
         });
     });
 });
