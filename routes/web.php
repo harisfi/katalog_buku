@@ -54,4 +54,10 @@ Route::prefix('admin')->group(function() {
             Route::inertia('/{id}/edit', 'Admin.KategoriBlog.Edit');
         });
     });
+    Route::prefix('konten')->group(function() {
+        Route::inertia('/', 'Admin.Konten.Index');
+        Route::inertia('/create', 'Admin.Konten.Create');
+        Route::inertia('/{id}', 'Admin.Konten.Show');
+        Route::inertia('/{id}/edit', 'Admin.Konten.Edit');
+    });
 });
