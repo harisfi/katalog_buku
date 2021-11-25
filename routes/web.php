@@ -60,4 +60,10 @@ Route::prefix('admin')->group(function() {
         Route::inertia('/{id}', 'Admin.Konten.Show');
         Route::inertia('/{id}/edit', 'Admin.Konten.Edit');
     });
+    Route::prefix('buku')->group(function() {
+        Route::inertia('/', 'Admin.Buku.Index');
+        Route::inertia('/create', 'Admin.Buku.Create');
+        Route::inertia('/{id}', 'Admin.Buku.Show');
+        Route::inertia('/{id}/edit', 'Admin.Buku.Edit');
+    });
 });
