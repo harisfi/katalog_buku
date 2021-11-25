@@ -67,12 +67,12 @@
             </Link>
           </li>
           <li class="nav-item">
-            <a href="/admin/blog" :class="'nav-link' + activeMatch(/\/admin\/blog*/g)">
+            <Link href="/admin/blog" :class="'nav-link' + activeMatch(/\/admin\/blog*/g)">
               <i class="nav-icon fab fa-blogger"></i>
               <p>
                 Blog
               </p>
-            </a>
+            </Link>
           </li>
           <li v-if="role === 'superadmin'" class="nav-item">
             <Link href="/admin/user" :class="'nav-link' + activeMatch(/\/admin\/user*/g)">
@@ -133,7 +133,7 @@ export default {
       return this.matcher(regex) ? ' active' : '';
     }
   },
-  mounted() {
+  created() {
     this.getRoleNow();
   }
 }
