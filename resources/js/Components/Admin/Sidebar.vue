@@ -83,7 +83,7 @@
             </Link>
           </li>
           <li class="nav-item">
-            <Link href="/admin/ubah-password" :class="'nav-link' + activeMatch(/\/admin\/ganti-password*/g)">
+            <Link href="/admin/ubah-password" :class="'nav-link' + activeMatch(/\/admin\/ubah-password*/g)">
               <i class="nav-icon fas fa-user-lock"></i>
               <p>
                 Ubah Password

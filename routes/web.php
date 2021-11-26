@@ -78,4 +78,5 @@ Route::prefix('admin')->group(function() {
         Route::inertia('/{id}', 'Admin.User.Show');
         Route::inertia('/{id}/edit', 'Admin.User.Edit');
     });
+    Route::inertia('/ubah-password', 'Admin.UbahPassword.Index');
 });
