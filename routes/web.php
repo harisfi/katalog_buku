@@ -72,4 +72,10 @@ Route::prefix('admin')->group(function() {
         Route::inertia('/{id}', 'Admin.Blog.Show');
         Route::inertia('/{id}/edit', 'Admin.Blog.Edit');
     });
+    Route::prefix('user')->group(function() {
+        Route::inertia('/', 'Admin.User.Index');
+        Route::inertia('/create', 'Admin.User.Create');
+        Route::inertia('/{id}', 'Admin.User.Show');
+        Route::inertia('/{id}/edit', 'Admin.User.Edit');
+    });
 });
