@@ -2,24 +2,33 @@
   <AdminLayout :icon="layout.icon" :title="layout.title" :breadcrumb="layout.title">
     <div class="card card-info">
       <div class="card-header">
-        <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Tambah Kategori Buku</h3>
+        <h3 class="card-title" style="margin-top:5px;">
+          <i class="far fa-list-alt"></i>
+          Form Tambah Kategori Buku
+        </h3>
         <div class="card-tools">
-          <Link href="/admin/master/kategori-buku" class="btn btn-sm btn-warning float-right"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</Link>
+          <Link href="/admin/master/kategori-buku" class="btn btn-sm btn-warning float-right">
+            <i class="fas fa-arrow-alt-circle-left"></i>
+            Kembali
+          </Link>
         </div>
       </div>
       <br>
-      <form class="form-horizontal" method="POST">
+      <form @submit.prevent="submit" class="form-horizontal">
         <div class="card-body">
           <div class="form-group row">
             <label for="kategoribuku" class="col-sm-3 col-form-label">Kategori Buku</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="kategoribuku" name="kategori_buku" value="">
+              <input type="text" class="form-control" v-model="form.kategori_buku">
             </div>
           </div>
         </div>
         <div class="card-footer">
           <div class="col-sm-10">
-            <button type="submit" class="btn btn-info float-right"><i class="fas fa-plus"></i> Tambah</button>
+            <button :disabled="form.processing" type="submit" class="btn btn-info float-right">
+              <i class="fas fa-plus"></i>
+              Tambah
+            </button>
           </div>
         </div>
       </form>
@@ -29,6 +38,7 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 import AdminLayout from '../../../Layouts/Admin';
 
 export default {
@@ -42,12 +52,16 @@ export default {
       layout: {
         icon: 'fas fa-plus',
         title: 'Tambah Kategori Buku'
+      },
+      form: {
+        kategori_buku: null
       }
     };
+  },
+  methods: {
+    submit() {
+      Inertia.post('/admin/master/kategori-buku', this.form);
+    }
   }
 }
 </script>
-
-<style>
-
-</style>

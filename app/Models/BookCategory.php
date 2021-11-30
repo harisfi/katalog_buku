@@ -9,6 +9,8 @@ class BookCategory extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function books()
     {
         return $this->belongsTo(Book::class);

@@ -2,24 +2,33 @@
   <AdminLayout :icon="layout.icon" :title="layout.title" :breadcrumb="layout.title">
     <div class="card card-info">
       <div class="card-header">
-        <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Edit Kategori Buku</h3>
+        <h3 class="card-title" style="margin-top:5px;">
+          <i class="far fa-list-alt"></i>
+          Form Edit Kategori Buku
+        </h3>
         <div class="card-tools">
-          <Link href="/admin/master/kategori-buku" class="btn btn-sm btn-warning float-right"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</Link>
+          <Link href="/admin/master/kategori-buku" class="btn btn-sm btn-warning float-right">
+            <i class="fas fa-arrow-alt-circle-left"></i>
+            Kembali
+          </Link>
         </div>
       </div>
       <br>
-      <form class="form-horizontal" method="POST">
+      <form @submit.prevent="submit" class="form-horizontal">
         <div class="card-body">
           <div class="form-group row">
             <label for="Kategori Buku" class="col-sm-3 col-form-label">Kategori Buku</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="kategori_buku" name="kategori_buku" value="<?= $kategori_buku ?>">
+              <input type="text" class="form-control" v-model="form.kategori_buku">
             </div>
           </div>
         </div>
         <div class="card-footer">
           <div class="col-sm-10">
-            <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Simpan</button>
+            <button :disabled="form.processing" type="submit" class="btn btn-info float-right">
+              <i class="fas fa-save"></i>
+              Simpan
+            </button>
           </div>
         </div>
       </form>
@@ -29,6 +38,7 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 import AdminLayout from '../../../Layouts/Admin';
 
 export default {
@@ -42,8 +52,22 @@ export default {
       layout: {
         icon: 'fas fa-edit',
         title: 'Edit Kategori Buku'
+      },
+      form: {
+        kategori_buku: null
       }
     };
+  },
+  props: {
+    bookCategory: Object
+  },
+  mounted() {
+    this.form.kategori_buku = this.bookCategory.kategori_buku;
+  },
+  methods: {
+    submit() {
+      Inertia.put('/admin/master/kategori-buku/' + this.bookCategory.id, this.form);
+    }
   }
 }
 </script>

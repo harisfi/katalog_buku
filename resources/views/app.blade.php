@@ -32,6 +32,8 @@
         <link rel="stylesheet" href="{{ asset('/adminlte/plugins/daterangepicker/daterangepicker.css') }}">
         <!-- summernote -->
         <link rel="stylesheet" href="{{ asset('/adminlte/plugins/summernote/summernote-bs4.min.css') }}">
+        <!-- sweetalert2 -->
+        <link rel="stylesheet" href="{{ asset('/adminlte/plugins/sweetalert2/sweetalert2.min.css') }}">
     @endif
     <title>Katalog Buku</title>
 </head>
@@ -72,6 +74,8 @@
         <script src="{{ asset('/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('/adminlte/dist/js/adminlte.js') }}"></script>
+        <!-- sweetalert2 -->
+        <script src="{{ asset('/adminlte/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
         <!-- AdminLTE for demo purposes -->
         {{-- <script src="{{ asset('/adminlte/dist/js/demo.js') }}"></script> --}}
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
