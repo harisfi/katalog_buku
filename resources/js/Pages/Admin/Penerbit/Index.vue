@@ -2,25 +2,30 @@
   <AdminLayout :icon="layout.icon" :title="layout.title" :breadcrumb="layout.title">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title" style="margin-top:5px;"><i class="fas fa-list-ul"></i> Daftar Penerbit</h3>
+        <h3 class="card-title" style="margin-top:5px;">
+          <i class="fas fa-list-ul"></i>
+          Daftar Penerbit
+        </h3>
         <div class="card-tools">
           <Link href="/admin/master/penerbit/create" class="btn btn-sm btn-info float-right">
-            <i class="fas fa-plus"></i> Tambah Penerbit
+            <i class="fas fa-plus"></i>
+            Tambah Penerbit
           </Link>
         </div>
       </div>
       <div class="card-body">
         <div class="col-md-12">
-          <form method="POST">
-            <div class="row">
-              <div class="col-md-4 bottom-10">
-                <input type="text" class="form-control" id="kata_kunci" name="katakunci" value="<?= (isset($katakunci)) ? $katakunci : '' ?>">
-              </div>
-              <div class="col-md-5 bottom-10">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>&nbsp; Search</button>
-              </div>
+          <div class="row">
+            <div class="col-md-4 bottom-10">
+              <input type="text" class="form-control" v-model="katakunci">
             </div>
-          </form>
+            <div class="col-md-5 bottom-10">
+              <Link :href="'/admin/master/penerbit?q=' + katakunci" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+                Search
+              </Link>
+            </div>
+          </div>
         </div><br>
         <table class="table table-bordered">
           <thead>
@@ -34,17 +39,39 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>$no</td>
-              <td>$penerbit</td>
-              <td>$alamat</td>
+            <tr v-for="pub in publisher.data" :key="publisher.data.indexOf(pub)">
+              <td>{{ publisher.from + publisher.data.indexOf(pub) }}</td>
+              <td>{{ pub.penerbit }}</td>
+              <td>{{ pub.alamat }}</td>
               <td align="center">
-                <Link href="/admin/master/penerbit/1/edit" class="btn btn-xs btn-info mr-1"><i class="fas fa-edit"></i> Edit</Link>
-                <Link href="#" class="btn btn-xs btn-warning"><i class="fas fa-trash"></i> Hapus</Link>
+                <Link :href="`/admin/master/penerbit/${pub.id}/edit`" class="btn btn-xs btn-info mr-1">
+                  <i class="fas fa-edit"></i>
+                  Edit
+                </Link>
+                <button @click="deleteItem(pub.id)" type="button" class="btn btn-xs btn-warning">
+                  <i class="fas fa-trash"></i>
+                  Hapus
+                </button>
               </td>
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="card-footer clearfix">
+        <nav aria-label="pagination">
+          <ul class="pagination pagination-sm m-0 float-right">
+            <li v-if="publisher.current_page > 1" class="page-item">
+              <Link class="page-link" :href="publisher.first_page_url">First</Link>
+            </li>
+            <li v-for="l in publisher.links" :key="publisher.links.indexOf(l)" :class="'page-item' + (l.active ? ' active' : '') + (l.url ? '' : ' disabled')">
+              <Link v-if="l.url && !l.active" class="page-link" :href="l.url" v-html="l.label"></Link>
+              <span v-else class="page-link" v-html="l.label"></span>
+            </li>
+            <li v-if="publisher.current_page < publisher.last_page" class="page-item">
+              <Link class="page-link" :href="publisher.last_page_url">Last</Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </AdminLayout>
@@ -52,6 +79,7 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 import AdminLayout from '../../../Layouts/Admin';
 
 export default {
@@ -67,6 +95,49 @@ export default {
         title: 'Penerbit'
       }
     };
+  },
+  props: {
+    publisher: Object,
+    katakunci: String
+  },
+  mounted() {
+    this.showFlashedMessage();
+  },
+  updated() {
+    this.showFlashedMessage();
+  },
+  methods: {
+    deleteItem(id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Inertia.delete('/admin/master/penerbit/' + id);
+        }
+      })
+    },
+    showFlashedMessage() {
+      if (this.$page.props.success != false) {
+        Swal.fire(
+          this.$page.props.success.title,
+          this.$page.props.success.text,
+          'success'
+        );
+      }
+      if (this.$page.props.error != false) {
+        Swal.fire(
+          this.$page.props.error.title,
+          this.$page.props.error.text,
+          'error'
+        );
+      }
+    }
   }
 }
 </script>

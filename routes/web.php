@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\KategoriBukuController;
+use App\Http\Controllers\Admin\PenerbitController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\User\AboutUsController;
 use App\Http\Controllers\User\BlogController;
@@ -37,15 +38,11 @@ Route::prefix('admin')->group(function() {
     Route::prefix('master')->group(function() {
         Route::resources([
             'kategori-buku' => KategoriBukuController::class,
-            'tag' => TagController::class
+            'tag' => TagController::class,
+            'penerbit' => PenerbitController::class
         ], [
             'except' => ['show']
         ]);
-        Route::prefix('penerbit')->group(function() {
-            Route::inertia('/', 'Admin.Penerbit.Index');
-            Route::inertia('/create', 'Admin.Penerbit.Create');
-            Route::inertia('/{id}/edit', 'Admin.Penerbit.Edit');
-        });
         Route::prefix('kategori-blog')->group(function() {
             Route::inertia('/', 'Admin.KategoriBlog.Index');
             Route::inertia('/create', 'Admin.KategoriBlog.Create');
