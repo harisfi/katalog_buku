@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\KategoriBukuController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\User\AboutUsController;
 use App\Http\Controllers\User\BlogController;
 use App\Http\Controllers\User\BookCategoryController;
@@ -34,12 +35,12 @@ Route::prefix('admin')->group(function() {
         Route::inertia('/edit', 'Admin.Profil.Edit');
     });
     Route::prefix('master')->group(function() {
-        Route::resource('kategori-buku', KategoriBukuController::class)->except(['show']);
-        Route::prefix('tag')->group(function() {
-            Route::inertia('/', 'Admin.Tag.Index');
-            Route::inertia('/create', 'Admin.Tag.Create');
-            Route::inertia('/{id}/edit', 'Admin.Tag.Edit');
-        });
+        Route::resources([
+            'kategori-buku' => KategoriBukuController::class,
+            'tag' => TagController::class
+        ], [
+            'except' => ['show']
+        ]);
         Route::prefix('penerbit')->group(function() {
             Route::inertia('/', 'Admin.Penerbit.Index');
             Route::inertia('/create', 'Admin.Penerbit.Create');

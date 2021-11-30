@@ -2,24 +2,33 @@
   <AdminLayout :icon="layout.icon" :title="layout.title" :breadcrumb="layout.title">
     <div class="card card-info">
       <div class="card-header">
-        <h3 class="card-title" style="margin-top:5px;"><i class="far fa-list-alt"></i> Form Edit Tag</h3>
+        <h3 class="card-title" style="margin-top:5px;">
+          <i class="far fa-list-alt"></i>
+          Form Edit Tag
+        </h3>
         <div class="card-tools">
-          <Link href="/admin/master/tag" class="btn btn-sm btn-warning float-right"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</Link>
+          <Link href="/admin/master/tag" class="btn btn-sm btn-warning float-right">
+            <i class="fas fa-arrow-alt-circle-left"></i>
+            Kembali
+          </Link>
         </div>
       </div>
       <br>
-      <form class="form-horizontal" method="POST">
+      <form @submit.prevent="submit" class="form-horizontal">
         <div class="card-body">
           <div class="form-group row">
             <label for="Tag" class="col-sm-3 col-form-label">Tag</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="Tag" name="tag" value="<?= $tag ?>">
+              <input type="text" class="form-control" v-model="form.tag">
             </div>
           </div>
         </div>
         <div class="card-footer">
           <div class="col-sm-10">
-            <button type="submit" class="btn btn-info float-right"><i class="fas fa-save"></i> Simpan</button>
+            <button :disabled="form.processing" type="submit" class="btn btn-info float-right">
+              <i class="fas fa-save"></i>
+              Simpan
+            </button>
           </div>
         </div>
       </form>
@@ -29,6 +38,7 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 import AdminLayout from '../../../Layouts/Admin';
 
 export default {
@@ -42,8 +52,22 @@ export default {
       layout: {
         icon: 'fas fa-edit',
         title: 'Edit Tag'
+      },
+      form: {
+        tag: null
       }
     };
+  },
+  props: {
+    tags: Object
+  },
+  mounted() {
+    this.form.tag = this.tags.tag;
+  },
+  methods: {
+    submit() {
+      Inertia.put('/admin/master/tag/' + this.tags.id, this.form);
+    }
   }
 }
 </script>

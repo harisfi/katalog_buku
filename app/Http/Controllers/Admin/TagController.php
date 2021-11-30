@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\KategoriBukuRequest;
-use App\Models\BookCategory;
+use App\Http\Requests\TagRequest;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class KategoriBukuController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,15 +18,15 @@ class KategoriBukuController extends Controller
     {
         $query = $request->input('q');
         if (empty($query)) {
-            $bookCategories = BookCategory::orderBy('kategori_buku')->paginate(5);
+            $tag = Tag::orderBy('tag')->paginate(5);
         } else {
-            $bookCategories = BookCategory::where('kategori_buku', 'like', '%' . $query . '%')
-                ->orderBy('kategori_buku')
+            $tag = Tag::where('tag', 'like', '%' . $query . '%')
+                ->orderBy('tag')
                 ->paginate(5);
         }
 
-        return inertia('Admin.KategoriBuku.Index', [
-            'bookCategories' => $bookCategories,
+        return inertia('Admin.Tag.Index', [
+            'tag' => $tag,
             'katakunci' => $query
         ]);
     }
@@ -38,7 +38,7 @@ class KategoriBukuController extends Controller
      */
     public function create()
     {
-        return inertia('Admin.KategoriBuku.Create');
+        return inertia('Admin.Tag.Create');
     }
 
     /**
@@ -47,27 +47,27 @@ class KategoriBukuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(KategoriBukuRequest $request)
+    public function store(TagRequest $request)
     {
         try {
             $validated = $request->validated();
-            BookCategory::create([
-                'kategori_buku' => $validated['kategori_buku']
+            Tag::create([
+                'tag' => $validated['tag']
             ]);
 
-            return redirect(url('/admin/master/kategori-buku'))
+            return redirect(url('/admin/master/tag'))
                 ->with([
                     'success' => [
                         'title' => 'Success!',
                         'text' => 'An item has been added.',
                     ]
                 ]);
-        } catch (\Throwable $th) {
-            return redirect(url('/admin/master/kategori-buku'))
+        } catch (\Exception $th) {
+            return redirect(url('/admin/master/tag'))
                 ->with([
                     'error' => [
                         'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
+                        'text' => 'Something went wrong!'.$th,
                     ]
                 ]);
         }
@@ -92,9 +92,9 @@ class KategoriBukuController extends Controller
      */
     public function edit($id)
     {
-        $bookCategory = BookCategory::findOrFail($id);
-        return inertia('Admin.KategoriBuku.Edit', [
-            'bookCategory' => $bookCategory
+        $tag = Tag::findOrFail($id);
+        return inertia('Admin.Tag.Edit', [
+            'tags' => $tag
         ]);
     }
 
@@ -105,15 +105,15 @@ class KategoriBukuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(KategoriBukuRequest $request, $id)
+    public function update(TagRequest $request, $id)
     {
         try {
             $validated = $request->validated();
-            $bookCategory = BookCategory::findOrFail($id);
-            $bookCategory->kategori_buku = $validated['kategori_buku'];
-            $bookCategory->save();
+            $tag = Tag::findOrFail($id);
+            $tag->tag = $validated['tag'];
+            $tag->save();
 
-            return redirect(url('/admin/master/kategori-buku'))
+            return redirect(url('/admin/master/tag'))
                 ->with([
                     'success' => [
                         'title' => 'Success!',
@@ -121,7 +121,7 @@ class KategoriBukuController extends Controller
                     ]
                 ]);
         } catch (\Throwable $th) {
-            return redirect(url('/admin/master/kategori-buku'))
+            return redirect(url('/admin/master/tag'))
                 ->with([
                     'error' => [
                         'title' => 'Oops...',
@@ -140,10 +140,10 @@ class KategoriBukuController extends Controller
     public function destroy($id)
     {
         try {
-            $bookCategory = BookCategory::findOrFail($id);
-            $bookCategory->delete();
+            $tag = Tag::findOrFail($id);
+            $tag->delete();
 
-            return redirect(url('/admin/master/kategori-buku'))
+            return redirect(url('/admin/master/tag'))
                 ->with([
                     'success' => [
                         'title' => 'Deleted!',
@@ -151,7 +151,7 @@ class KategoriBukuController extends Controller
                     ]
                 ]);
         } catch (\Throwable $th) {
-            return redirect(url('/admin/master/kategori-buku'))
+            return redirect(url('/admin/master/tag'))
                 ->with([
                     'error' => [
                         'title' => 'Oops...',

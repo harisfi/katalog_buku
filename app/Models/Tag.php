@@ -9,6 +9,8 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function bukus()
     {
         return $this->belongsToMany(Buku::class, 'tag_bukus');
