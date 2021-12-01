@@ -22,12 +22,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/book/{id}', [BookController::class, 'show']);
-Route::get('/book-category/{id}', [BookCategoryController::class, 'show']);
-Route::get('/contact-us', [ContactUsController::class, 'index']);
-Route::get('/about-us', [AboutUsController::class, 'index']);
-Route::resource('blog', BlogController::class)->only(['index', 'show']);
+Route::middleware('user.data')->group(function() {
+    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/book/{id}', [BookController::class, 'show']);
+    Route::get('/book-category/{id}', [BookCategoryController::class, 'show']);
+    Route::get('/contact-us', [ContactUsController::class, 'index']);
+    Route::get('/about-us', [AboutUsController::class, 'index']);
+    Route::resource('blog', BlogController::class)->only(['index', 'show']);
+});
 
 Route::prefix('admin')->group(function() {
     Route::redirect('/', '/admin/profil');

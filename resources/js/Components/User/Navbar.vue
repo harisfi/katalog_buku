@@ -38,7 +38,6 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
-import axios from 'axios';
 
 export default {
   name: 'Navbar',
@@ -48,22 +47,8 @@ export default {
   data() {
     return {
       pathNow: window.location.pathname,
-      bookCategories: null
+      bookCategories: this.$page.props.kategoriBuku
     };
-  },
-  methods: {
-    async getBookCategories() {
-      const config = {
-        method: 'get',
-        url: '/api/v1/book-categories'
-      };
-      const response = await axios(config);
-      const data = response.data;
-      this.bookCategories = data;
-    }
-  },
-  mounted() {
-    this.getBookCategories();
   }
 }
 </script>

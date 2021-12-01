@@ -17,8 +17,7 @@ class BookCategoryController extends Controller
      */
     public function index()
     {
-        $bookCategories = BookCategory::all('id', 'kategori_buku');
-        return json_encode($bookCategories);
+        //
     }
 
     /**
