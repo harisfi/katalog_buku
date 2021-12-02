@@ -4,7 +4,8 @@
       <div class="card-header">
         <div class="card-tools">
           <Link href="/admin/blog" class="btn btn-sm btn-warning float-right">
-            <i class="fas fa-arrow-alt-circle-left"></i> Kembali
+            <i class="fas fa-arrow-alt-circle-left"></i>
+            Kembali
           </Link>
         </div>
       </div>
@@ -13,28 +14,27 @@
           <tbody>
             <tr>
               <td width="20%"><strong>Tanggal</strong></td>
-              <td width="80%">$tanggal</td>
+              <td width="80%">{{ blog.tanggal }}</td>
             </tr>
             <tr>
               <td width="20%"><strong>Kategori Blog</strong></td>
-              <td width="80%">$kategori</td>
+              <td width="80%">{{ blog.blog_category.kategori_blog }}</td>
             </tr>
             <tr>
               <td width="20%"><strong>Judul</strong></td>
-              <td width="80%">$judul</td>
+              <td width="80%">{{ blog.judul }}</td>
             </tr>
             <tr>
               <td width="20%"><strong>Penulis</strong></td>
-              <td width="80%">$penulis</td>
+              <td width="80%">{{ blog.user.name }}</td>
             </tr>
             <tr>
               <td width="20%"><strong>Isi</strong></td>
-              <td width="80%">$isi</td>
+              <td width="80%" v-html="blog.isi"></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="card-footer clearfix">&nbsp;</div>
     </div>
   </AdminLayout>
 </template>
@@ -56,6 +56,9 @@ export default {
         title: 'Detail Blog'
       }
     };
+  },
+  props: {
+    blog: Object
   }
 }
 </script>
