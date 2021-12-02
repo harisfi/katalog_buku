@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\KategoriBlogController;
 use App\Http\Controllers\Admin\KategoriBukuController;
+use App\Http\Controllers\Admin\KontenController;
 use App\Http\Controllers\Admin\PenerbitController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\User\AboutUsController;
@@ -46,12 +47,9 @@ Route::prefix('admin')->group(function() {
     ], [
         'except' => 'show'
     ]);
-    Route::prefix('konten')->group(function() {
-        Route::inertia('/', 'Admin.Konten.Index');
-        Route::inertia('/create', 'Admin.Konten.Create');
-        Route::inertia('/{id}', 'Admin.Konten.Show');
-        Route::inertia('/{id}/edit', 'Admin.Konten.Edit');
-    });
+    Route::resources([
+        'konten' => KontenController::class
+    ]);
     Route::prefix('buku')->group(function() {
         Route::inertia('/', 'Admin.Buku.Index');
         Route::inertia('/create', 'Admin.Buku.Create');

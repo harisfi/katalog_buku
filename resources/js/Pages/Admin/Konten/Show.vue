@@ -13,15 +13,15 @@
           <tbody>
             <tr>
               <td width="20%"><strong>Tanggal</strong></td>
-              <td width="80%">$tanggal</td>
+              <td width="80%">{{ content.tanggal }}</td>
             </tr>
             <tr>
               <td width="20%"><strong>Judul</strong></td>
-              <td width="80%">$judul</td>
+              <td width="80%">{{ content.judul }}</td>
             </tr>
             <tr>
-              <td width="20%"><strong>Sinopsis</strong></td>
-              <td width="80%">$isi</td>
+              <td width="20%"><strong>Isi</strong></td>
+              <td width="80%" v-html="content.isi"></td>
             </tr>
           </tbody>
         </table>
@@ -48,6 +48,9 @@ export default {
         title: 'Detail Konten'
       }
     };
+  },
+  props: {
+    content: Object
   }
 }
 </script>
