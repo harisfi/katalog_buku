@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BukuController;
 use App\Http\Controllers\Admin\KategoriBlogController;
 use App\Http\Controllers\Admin\KategoriBukuController;
 use App\Http\Controllers\Admin\KontenController;
@@ -48,14 +49,9 @@ Route::prefix('admin')->group(function() {
         'except' => 'show'
     ]);
     Route::resources([
-        'konten' => KontenController::class
+        'konten' => KontenController::class,
+        'buku' => BukuController::class
     ]);
-    Route::prefix('buku')->group(function() {
-        Route::inertia('/', 'Admin.Buku.Index');
-        Route::inertia('/create', 'Admin.Buku.Create');
-        Route::inertia('/{id}', 'Admin.Buku.Show');
-        Route::inertia('/{id}/edit', 'Admin.Buku.Edit');
-    });
     Route::prefix('blog')->group(function() {
         Route::inertia('/', 'Admin.Blog.Index');
         Route::inertia('/create', 'Admin.Blog.Create');
