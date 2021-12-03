@@ -4,7 +4,8 @@
       <div class="card-header">
         <div class="card-tools">
           <Link href="/admin/user" class="btn btn-sm btn-warning float-right">
-            <i class="fas fa-arrow-alt-circle-left"></i> Kembali
+            <i class="fas fa-arrow-alt-circle-left"></i>
+            Kembali
           </Link>
         </div>
       </div>
@@ -16,28 +17,27 @@
             </tr>
             <tr>
               <td><strong>Foto User</strong></td>
-              <td><img src="foto/<?= $foto ?>" class="img-fluid img-rounded shadow" width="200px;" loading="lazy"></td>
+              <td><div><img :src="foto" class="img-fluid img-rounded shadow"></div></td>
             </tr>
             <tr>
               <td width="20%"><strong>Nama</strong></td>
-              <td width="80%">$nama</td>
+              <td width="80%">{{ user.name }}</td>
             </tr>
             <tr>
               <td width="20%"><strong>Email</strong></td>
-              <td width="80%">$email</td>
+              <td width="80%">{{ user.email }}</td>
             </tr>
             <tr>
               <td width="20%"><strong>Level</strong></td>
-              <td width="80%">$level</td>
+              <td width="80%">{{ user.level.charAt(0).toUpperCase() + user.level.slice(1) }}</td>
             </tr>
             <tr>
               <td width="20%"><strong>Username</strong></td>
-              <td width="80%">$username</td>
+              <td width="80%">{{ user.username }}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="card-footer clearfix">&nbsp;</div>
     </div>
   </AdminLayout>
 </template>
@@ -59,6 +59,10 @@ export default {
         title: 'Detail User'
       }
     };
+  },
+  props: {
+    user: null,
+    foto: null
   }
 }
 </script>

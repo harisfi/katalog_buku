@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\KategoriBukuController;
 use App\Http\Controllers\Admin\KontenController;
 use App\Http\Controllers\Admin\PenerbitController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\AboutUsController;
 use App\Http\Controllers\User\BlogController;
 use App\Http\Controllers\User\BookCategoryController;
@@ -52,13 +53,8 @@ Route::prefix('admin')->group(function() {
     Route::resources([
         'konten' => KontenController::class,
         'buku' => BukuController::class,
-        'blog' => AdminBlogController::class
+        'blog' => AdminBlogController::class,
+        'user' => UserController::class
     ]);
-    Route::prefix('user')->group(function() {
-        Route::inertia('/', 'Admin.User.Index');
-        Route::inertia('/create', 'Admin.User.Create');
-        Route::inertia('/{id}', 'Admin.User.Show');
-        Route::inertia('/{id}/edit', 'Admin.User.Edit');
-    });
     Route::inertia('/ubah-password', 'Admin.UbahPassword.Index');
 });
