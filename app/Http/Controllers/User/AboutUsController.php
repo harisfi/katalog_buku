@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Content;
 use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
@@ -14,7 +15,12 @@ class AboutUsController extends Controller
      */
     public function index()
     {
-        return inertia('User.About');
+        $about = Content::where('judul', 'like', '%About Us%')
+            ->limit(1)
+            ->get(['judul', 'isi']);
+        return inertia('User.About', [
+            'about' => $about[0]
+        ]);
     }
 
     /**

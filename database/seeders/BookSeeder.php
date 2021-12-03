@@ -15,7 +15,7 @@ class BookSeeder extends Seeder
     public function run()
     {
         Book::factory()
-            ->hasTags(3)
+            ->hasTag(3)
             ->count(5)
             ->create();
     }

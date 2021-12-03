@@ -45,8 +45,8 @@
       <div class="container">
         <div class="row featurette">
           <div class="col-md-7">
-            <h2 class="featurette-heading">{{ wTitle }}</h2>
-            <p class="lead">{{ wContent }}</p>
+            <h2 class="featurette-heading">{{ welcome.judul }}</h2>
+            <p class="lead">{{ welcome.isi }}</p>
           </div>
           <div class="col-md-5">
             <img src="/images/undraw_book_lover_mkck.svg" class="img-fluid mx-auto featurette-image"/>
@@ -55,8 +55,6 @@
         <hr class="featurette-divider"/>
       </div>
     </section>
-    <!-- #notes-item -->
-
     <section id="product-item">
       <div class="container">
         <h2>Koleksi Terbaru</h2>
@@ -78,8 +76,7 @@
         </div>
       </div>
     </section>
-    <br /><br /><!-- #product-item -->
-
+    <br/><br/>
     <section id="quotes-item" class="bg-light" style="min-height: 80px; padding: 40px 0px 0px 0px">
       <div class="container">
         <blockquote class="blockquote text-center">
@@ -93,8 +90,7 @@
         </blockquote>
       </div>
     </section>
-    <br /><br />
-
+    <br/><br/>
     <section id="blog-item" class="mb-4">
       <div class="container">
         <h2>Blog Terbaru</h2>
@@ -132,8 +128,7 @@ export default {
     Link
   },
   props: {
-    wTitle: String,
-    wContent: String,
+    welcome: Object,
     books: Array,
     blogs: Array
   },
