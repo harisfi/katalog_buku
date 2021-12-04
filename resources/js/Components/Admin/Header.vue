@@ -10,10 +10,10 @@
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a href="/admin/signout" class="nav-link">
-          Sign Out&nbsp;
+        <Link href="/logout" class="nav-link">
+          Log Out
           <i class="fas fa-sign-out-alt"></i>
-        </a>
+        </Link>
       </li>
     </ul>
   </nav>

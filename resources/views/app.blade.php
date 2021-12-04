@@ -11,7 +11,7 @@
     <!-- Global CSS-->
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
 
-    @if (request()->is('admin*'))
+    @if (request()->is('admin*') || request()->is('login'))
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
         <!-- Font Awesome -->
@@ -43,7 +43,7 @@
     <script src="{{ asset('/js/jquery-3.5.1.slim.min.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.bundle.min.js') }}"></script>
 
-    @if (request()->is('admin*'))
+    @if (request()->is('admin*') || request()->is('login'))
         <!-- jQuery -->
         <script src="{{ asset('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
         <!-- jQuery UI 1.11.4 -->

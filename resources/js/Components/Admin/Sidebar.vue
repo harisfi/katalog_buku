@@ -15,8 +15,8 @@
               </p>
             </Link>
           </li>
-          <li :class="'nav-item has-treeview' + (matcher(/\/admin\/master*/g) ? ' menu-open' : '')">
-            <a href="#" class="nav-link" :style="matcher(/\/admin\/master*/g) ? 'display: block' : ''">
+          <li :class="'nav-item has-treeview' + (menuOpened ? ' menu-open' : '')">
+            <a href="#" class="nav-link" :style="menuOpened ? 'display: block' : ''">
               <i class="nav-icon fas fa-database"></i>
               <p>
                 Data Master
@@ -74,7 +74,7 @@
               </p>
             </Link>
           </li>
-          <li v-if="role === 'superadmin'" class="nav-item">
+          <li v-if="level === 'superadmin'" class="nav-item">
             <Link href="/admin/user" :class="'nav-link' + activeMatch(/\/admin\/user*/g)">
               <i class="nav-icon fas fa-user-cog"></i>
               <p>
@@ -91,10 +91,10 @@
             </Link>
           </li>
           <li class="nav-item">
-            <Link href="/admin/signout" class="nav-link">
+            <Link href="/logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
-                Sign Out
+                Log Out
               </p>
             </Link>
           </li>
@@ -113,19 +113,11 @@ export default {
   data() {
     return {
       pathNow: window.location.pathname,
-      role: null
+      level: this.$page.props.level,
+      menuOpened: false
     };
   },
   methods: {
-    async getRoleNow() {
-      const config = {
-        method: 'get',
-        url: '/api/v1/user-role'
-      };
-      const response = await axios(config);
-      const data = response.data;
-      this.role = data;
-    },
     matcher(regex) {
       return this.pathNow.match(regex);
     },
@@ -133,8 +125,8 @@ export default {
       return this.matcher(regex) ? ' active' : '';
     }
   },
-  created() {
-    this.getRoleNow();
+  mounted() {
+    this.menuOpened = this.matcher(/\/admin\/master*/g) != null;
   }
 }
 </script>

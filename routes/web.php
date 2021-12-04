@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\KontenController;
 use App\Http\Controllers\Admin\PenerbitController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\AboutUsController;
 use App\Http\Controllers\User\BlogController;
 use App\Http\Controllers\User\BookCategoryController;
@@ -36,25 +37,37 @@ Route::middleware('user.data')->group(function() {
     Route::resource('blog', BlogController::class)->only(['index', 'show']);
 });
 
-Route::prefix('admin')->group(function() {
-    Route::redirect('/', '/admin/profil');
-    Route::prefix('profil')->group(function() {
-        Route::inertia('/', 'Admin.Profil.Index');
-        Route::inertia('/edit', 'Admin.Profil.Edit');
+Route::prefix('login')->group(function() {
+    Route::inertia('/', 'Login')->name('login');
+    Route::post('/', [AuthController::class, 'login']);
+});
+
+Route::get('/logout', [AuthController::class, 'logout']);
+
+Route::middleware('auth')->group(function() {
+    Route::group([
+        'prefix' => 'admin',
+        'middleware' => 'auth.user:admin,superadmin'
+    ], function() {
+        Route::redirect('/', '/admin/profil');
+        Route::prefix('profil')->group(function() {
+            Route::inertia('/', 'Admin.Profil.Index');
+            Route::inertia('/edit', 'Admin.Profil.Edit');
+        });
+        Route::resources([
+            'master/kategori-buku' => KategoriBukuController::class,
+            'master/tag' => TagController::class,
+            'master/penerbit' => PenerbitController::class,
+            'master/kategori-blog' => KategoriBlogController::class
+        ], [
+            'except' => 'show'
+        ]);
+        Route::resources([
+            'konten' => KontenController::class,
+            'buku' => BukuController::class,
+            'blog' => AdminBlogController::class,
+            'user' => UserController::class
+        ]);
+        Route::inertia('/ubah-password', 'Admin.UbahPassword.Index');
     });
-    Route::resources([
-        'master/kategori-buku' => KategoriBukuController::class,
-        'master/tag' => TagController::class,
-        'master/penerbit' => PenerbitController::class,
-        'master/kategori-blog' => KategoriBlogController::class
-    ], [
-        'except' => 'show'
-    ]);
-    Route::resources([
-        'konten' => KontenController::class,
-        'buku' => BukuController::class,
-        'blog' => AdminBlogController::class,
-        'user' => UserController::class
-    ]);
-    Route::inertia('/ubah-password', 'Admin.UbahPassword.Index');
 });
