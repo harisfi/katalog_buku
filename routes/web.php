@@ -76,7 +76,7 @@ Route::middleware('auth')->group(function() {
     
     Route::group([
         'prefix' => 'admin',
-        'middleware' => 'auth.user:admin,superadmin'
+        'middleware' => 'auth.user:superadmin'
     ], function() {
         Route::resource('user', UserController::class);
     });
