@@ -32,38 +32,6 @@ class ProfilController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -113,32 +81,9 @@ class ProfilController extends Controller
 
             $profile->save();
 
-            return redirect(url('/admin/profil'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'Profile has been edited.',
-                    ]
-                ]);
+            return redirect(url('/admin/profil'))->with(config('constants.msg.success.profile'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/profil'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/profil'))->with(config('constants.msg.error'));
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

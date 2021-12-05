@@ -55,33 +55,10 @@ class KategoriBlogController extends Controller
                 'kategori_blog' => $validated['kategori_blog']
             ]);
 
-            return redirect(url('/admin/master/kategori-blog'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been added.',
-                    ]
-                ]);
+            return redirect(url('/admin/master/kategori-blog'))->with(config('constants.msg.success.add'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/master/kategori-blog'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/master/kategori-blog'))->with(config('constants.msg.error'));
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -113,21 +90,9 @@ class KategoriBlogController extends Controller
             $blogCategory->kategori_blog = $validated['kategori_blog'];
             $blogCategory->save();
 
-            return redirect(url('/admin/master/kategori-blog'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been edited.',
-                    ]
-                ]);
+            return redirect(url('/admin/master/kategori-blog'))->with(config('constants.msg.success.edit'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/master/kategori-blog'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/master/kategori-blog'))->with(config('constants.msg.error'));
         }
     }
 
@@ -143,21 +108,9 @@ class KategoriBlogController extends Controller
             $blogCategory = BlogCategory::findOrFail($id);
             $blogCategory->delete();
 
-            return redirect(url('/admin/master/kategori-blog'))
-                ->with([
-                    'success' => [
-                        'title' => 'Deleted!',
-                        'text' => 'An item has been deleted.',
-                    ]
-                ]);
+            return redirect(url('/admin/master/kategori-blog'))->with(config('constants.msg.success.delete'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/master/kategori-blog'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/master/kategori-blog'))->with(config('constants.msg.error'));
         }
     }
 }

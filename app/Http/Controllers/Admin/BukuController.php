@@ -90,21 +90,9 @@ class BukuController extends Controller
             
             $book->tag()->attach($validated['tags']);
 
-            return redirect(url('/admin/buku'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been added.',
-                    ]
-                ]);
+            return redirect(url('/admin/buku'))->with(config('constants.msg.success.add'));
         } catch (\Exception $th) {
-            return redirect(url('/admin/buku'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/buku'))->with(config('constants.msg.error'));
         }
     }
 
@@ -188,21 +176,9 @@ class BukuController extends Controller
             $book->tag()->detach();
             $book->tag()->attach($validated['tags']);
 
-            return redirect(url('/admin/buku'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been edited.',
-                    ]
-                ]);
+            return redirect(url('/admin/buku'))->with(config('constants.msg.success.edit'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/buku'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/buku'))->with(config('constants.msg.error'));
         }
     }
 
@@ -219,21 +195,9 @@ class BukuController extends Controller
             $book->tag()->detach();
             $book->delete();
 
-            return redirect(url('/admin/buku'))
-                ->with([
-                    'success' => [
-                        'title' => 'Deleted!',
-                        'text' => 'An item has been deleted.',
-                    ]
-                ]);
+            return redirect(url('/admin/buku'))->with(config('constants.msg.success.delete'));
         } catch (\Exception $th) {
-            return redirect(url('/admin/buku'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!'.$th,
-                    ]
-                ]);
+            return redirect(url('/admin/buku'))->with(config('constants.msg.error'));
         }
     }
 }

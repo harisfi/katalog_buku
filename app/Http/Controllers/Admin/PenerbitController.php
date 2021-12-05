@@ -56,33 +56,10 @@ class PenerbitController extends Controller
                 'alamat' => $validated['alamat'],
             ]);
 
-            return redirect(url('/admin/master/penerbit'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been added.',
-                    ]
-                ]);
+            return redirect(url('/admin/master/penerbit'))->with(config('constants.msg.success.add'));
         } catch (\Exception $th) {
-            return redirect(url('/admin/master/penerbit'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!'.$th,
-                    ]
-                ]);
+            return redirect(url('/admin/master/penerbit'))->with(config('constants.msg.error'));
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -115,21 +92,9 @@ class PenerbitController extends Controller
             $publisher->alamat = $validated['alamat'];
             $publisher->save();
 
-            return redirect(url('/admin/master/penerbit'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been edited.',
-                    ]
-                ]);
+            return redirect(url('/admin/master/penerbit'))->with(config('constants.msg.success.edit'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/master/penerbit'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/master/penerbit'))->with(config('constants.msg.error'));
         }
     }
 
@@ -145,21 +110,9 @@ class PenerbitController extends Controller
             $publisher = Publisher::findOrFail($id);
             $publisher->delete();
 
-            return redirect(url('/admin/master/penerbit'))
-                ->with([
-                    'success' => [
-                        'title' => 'Deleted!',
-                        'text' => 'An item has been deleted.',
-                    ]
-                ]);
+            return redirect(url('/admin/master/penerbit'))->with(config('constants.msg.success.delete'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/master/penerbit'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/master/penerbit'))->with(config('constants.msg.error'));
         }
     }
 }

@@ -57,21 +57,9 @@ class KontenController extends Controller
                 'tanggal' => now()->format('Y-m-d')
             ]);
 
-            return redirect(url('/admin/konten'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been added.',
-                    ]
-                ]);
+            return redirect(url('/admin/konten'))->with(config('constants.msg.success.add'));
         } catch (\Exception $th) {
-            return redirect(url('/admin/konten'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/konten'))->with(config('constants.msg.error'));
         }
     }
 
@@ -119,21 +107,9 @@ class KontenController extends Controller
             $content->isi = $validated['isi'];
             $content->save();
 
-            return redirect(url('/admin/konten'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been edited.',
-                    ]
-                ]);
+            return redirect(url('/admin/konten'))->with(config('constants.msg.success.edit'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/konten'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/konten'))->with(config('constants.msg.error'));
         }
     }
 
@@ -149,21 +125,9 @@ class KontenController extends Controller
             $content = Content::findOrFail($id);
             $content->delete();
 
-            return redirect(url('/admin/konten'))
-                ->with([
-                    'success' => [
-                        'title' => 'Deleted!',
-                        'text' => 'An item has been deleted.',
-                    ]
-                ]);
+            return redirect(url('/admin/konten'))->with(config('constants.msg.success.delete'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/konten'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/konten'))->with(config('constants.msg.error'));
         }
     }
 }

@@ -69,21 +69,9 @@ class UserController extends Controller
                 'level' => $validated['level']
             ]);
 
-            return redirect(url('/admin/user'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been added.',
-                    ]
-                ]);
+            return redirect(url('/admin/user'))->with(config('constants.msg.success.add'));
         } catch (\Exception $th) {
-            return redirect(url('/admin/user'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/user'))->with(config('constants.msg.error'));
         }
     }
 
@@ -157,21 +145,9 @@ class UserController extends Controller
             $user->level = $validated['level'];
             $user->save();
 
-            return redirect(url('/admin/user'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been edited.',
-                    ]
-                ]);
+            return redirect(url('/admin/user'))->with(config('constants.msg.success.edit'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/user'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/user'))->with(config('constants.msg.error'));
         }
     }
 
@@ -190,21 +166,9 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->delete();
 
-            return redirect(url('/admin/user'))
-                ->with([
-                    'success' => [
-                        'title' => 'Deleted!',
-                        'text' => 'An item has been deleted.',
-                    ]
-                ]);
+            return redirect(url('/admin/user'))->with(config('constants.msg.success.delete'));
         } catch (\Exception $th) {
-            return redirect(url('/admin/user'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!'.$th,
-                    ]
-                ]);
+            return redirect(url('/admin/user'))->with(config('constants.msg.error'));
         }
     }
 }

@@ -68,21 +68,9 @@ class BlogController extends Controller
                 'blog_category_id' => $validated['blog_category_id']
             ]);
 
-            return redirect(url('/admin/blog'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been added.',
-                    ]
-                ]);
+            return redirect(url('/admin/blog'))->with(config('constants.msg.success.add'));
         } catch (\Exception $th) {
-            return redirect(url('/admin/blog'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/blog'))->with(config('constants.msg.error'));
         }
     }
 
@@ -137,21 +125,9 @@ class BlogController extends Controller
             $blog->blog_category_id = $validated['blog_category_id'];
             $blog->save();
 
-            return redirect(url('/admin/blog'))
-                ->with([
-                    'success' => [
-                        'title' => 'Success!',
-                        'text' => 'An item has been edited.',
-                    ]
-                ]);
+            return redirect(url('/admin/blog'))->with(config('constants.msg.success.edit'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/blog'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/blog'))->with(config('constants.msg.error'));
         }
     }
 
@@ -167,21 +143,9 @@ class BlogController extends Controller
             $blog = Blog::findOrFail($id);
             $blog->delete();
 
-            return redirect(url('/admin/blog'))
-                ->with([
-                    'success' => [
-                        'title' => 'Deleted!',
-                        'text' => 'An item has been deleted.',
-                    ]
-                ]);
+            return redirect(url('/admin/blog'))->with(config('constants.msg.success.delete'));
         } catch (\Throwable $th) {
-            return redirect(url('/admin/blog'))
-                ->with([
-                    'error' => [
-                        'title' => 'Oops...',
-                        'text' => 'Something went wrong!',
-                    ]
-                ]);
+            return redirect(url('/admin/blog'))->with(config('constants.msg.error'));
         }
     }
 }
