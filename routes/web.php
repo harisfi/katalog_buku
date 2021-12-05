@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\KontenController;
 use App\Http\Controllers\Admin\PenerbitController;
 use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\UbahPasswordController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\AboutUsController;
@@ -69,7 +70,8 @@ Route::middleware('auth')->group(function() {
             'buku' => BukuController::class,
             'blog' => AdminBlogController::class
         ]);
-        Route::inertia('/ubah-password', 'Admin.UbahPassword.Index');
+        Route::get('/ubah-password', [UbahPasswordController::class, 'edit']);
+        Route::post('/ubah-password', [UbahPasswordController::class, 'update']);
     });
     
     Route::group([
