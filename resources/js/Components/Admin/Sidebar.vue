@@ -91,7 +91,7 @@
             </Link>
           </li>
           <li class="nav-item">
-            <Link href="/logout" class="nav-link">
+            <Link @click="confirmLogout()" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Log Out
@@ -106,6 +106,7 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
   name: 'AdminSidebar',
@@ -123,6 +124,21 @@ export default {
     },
     activeMatch(regex) {
       return this.matcher(regex) ? ' active' : '';
+    },
+    confirmLogout() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You will be logged out!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, log out!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Inertia.get('/logout');
+        }
+      })
     }
   },
   mounted() {

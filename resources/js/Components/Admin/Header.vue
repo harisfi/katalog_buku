@@ -10,7 +10,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <Link href="/logout" class="nav-link">
+        <Link @click="confirmLogout()" class="nav-link">
           Log Out
           <i class="fas fa-sign-out-alt"></i>
         </Link>
@@ -21,10 +21,28 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 
 export default {
   name: 'AdminHeader',
-  components: {Link}
+  components: {Link},
+  methods: {
+    confirmLogout() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You will be logged out!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, log out!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Inertia.get('/logout');
+        }
+      })
+    }
+  }
 }
 </script>
 

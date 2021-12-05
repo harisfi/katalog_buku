@@ -21,9 +21,14 @@ class UserController extends Controller
     {
         $query = $request->input('q');
         if (empty($query)) {
-            $users = User::orderBy('name')->paginate(5);
+            $users = User::where('id', '!=', auth()->user()->id)
+                ->orderByDesc('level')->orderBy('name')
+                ->paginate(5);
         } else {
-            $users = User::where('name', 'like', '%' . $query . '%')->orderBy('name')->paginate(5);
+            $users = User::where([
+                ['id', '!=', auth()->user()->id],
+                ['name', 'like', '%' . $query . '%']
+            ])->orderByDesc('level')->orderBy('name')->paginate(5);
         }
 
         return inertia('Admin.User.Index', [
@@ -90,6 +95,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        if ($id == auth()->user()->id) {
+            return abort(404);
+        }
         $user = User::findOrFail($id);
         $foto = asset('storage/' . $user['foto']);
 
@@ -107,6 +115,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        if ($id == auth()->user()->id) {
+            return abort(404);
+        }
         $user = User::findOrFail($id);
         return inertia('Admin.User.Edit', [
             'user' => $user
@@ -122,6 +133,9 @@ class UserController extends Controller
      */
     public function update(UserEditRequest $request, $id)
     {
+        if ($id == auth()->user()->id) {
+            return abort(404);
+        }
         try {
             $validated = $request->validated();
 
@@ -169,6 +183,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if ($id == auth()->user()->id) {
+            return abort(404);
+        }
         try {
             $user = User::findOrFail($id);
             $user->delete();

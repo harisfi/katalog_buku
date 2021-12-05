@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\KategoriBlogController;
 use App\Http\Controllers\Admin\KategoriBukuController;
 use App\Http\Controllers\Admin\KontenController;
 use App\Http\Controllers\Admin\PenerbitController;
+use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
@@ -51,8 +52,9 @@ Route::middleware('auth')->group(function() {
     ], function() {
         Route::redirect('/', '/admin/profil');
         Route::prefix('profil')->group(function() {
-            Route::inertia('/', 'Admin.Profil.Index');
-            Route::inertia('/edit', 'Admin.Profil.Edit');
+            Route::get('/', [ProfilController::class, 'index']);
+            Route::get('/edit', [ProfilController::class, 'edit']);
+            Route::post('/', [ProfilController::class, 'update']);
         });
         Route::resources([
             'master/kategori-buku' => KategoriBukuController::class,
@@ -65,9 +67,15 @@ Route::middleware('auth')->group(function() {
         Route::resources([
             'konten' => KontenController::class,
             'buku' => BukuController::class,
-            'blog' => AdminBlogController::class,
-            'user' => UserController::class
+            'blog' => AdminBlogController::class
         ]);
         Route::inertia('/ubah-password', 'Admin.UbahPassword.Index');
+    });
+    
+    Route::group([
+        'prefix' => 'admin',
+        'middleware' => 'auth.user:admin,superadmin'
+    ], function() {
+        Route::resource('user', UserController::class);
     });
 });
