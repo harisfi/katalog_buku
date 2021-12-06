@@ -7,6 +7,8 @@
 - Node JS [Node JS](https://nodejs.org/en/)
 - Terminal
 
+### Database Design
+![img](/public/images/erd.png)
 
 ## Installation
 
