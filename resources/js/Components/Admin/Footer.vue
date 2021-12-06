@@ -10,7 +10,3 @@ export default {
   name: 'AdminFooter'
 }
 </script>
-
-<style>
-
-</style>
