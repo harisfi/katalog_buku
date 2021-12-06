@@ -28,6 +28,7 @@
                   {{ form.progress.percentage }}%
                 </div>
               </div>
+              <span v-if="errors.cover" class="small text-danger">{{ errors.cover }}</span>
             </div>
           </div>
           <div class="form-group row">
@@ -37,18 +38,21 @@
                 <option value="" disabled selected>- Pilih Kategori -</option>
                 <option v-for="bc in bookCategories" :key="bc.id" :value="bc.id">{{ bc.kategori_buku }}</option>
               </select>
+              <span v-if="errors.book_category_id" class="small text-danger">{{ errors.book_category_id }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="nim" class="col-sm-3 col-form-label">Judul</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.judul" id="judul">
+              <span v-if="errors.judul" class="small text-danger">{{ errors.judul }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="pengarang" class="col-sm-3 col-form-label">Pengarang</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.pengarang" id="pengarang">
+              <span v-if="errors.pengarang" class="small text-danger">{{ errors.pengarang }}</span>
             </div>
           </div>
           <div class="form-group row">
@@ -58,6 +62,7 @@
                 <option value="" disabled selected>- Pilih penerbit -</option>
                 <option v-for="p in publishers" :key="p.id" :value="p.id">{{ p.penerbit }}</option>
               </select>
+              <span v-if="errors.publisher_id" class="small text-danger">{{ errors.publisher_id }}</span>
             </div>
           </div>
           <div class="form-group row">
@@ -69,12 +74,14 @@
                   <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                 </div>
               </div>
+              <span v-if="errors.tahun_terbit" class="small text-danger">{{ errors.tahun_terbit }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="sinopsis" class="col-sm-3 col-form-label">Sinopsis</label>
             <div class="col-sm-7">
               <textarea class="form-control" id="editor1"></textarea>
+              <span v-if="errors.sinopsis" class="small text-danger">{{ errors.sinopsis }}</span>
             </div>
           </div>
           <div class="form-group row">
@@ -86,6 +93,7 @@
                   <label class="form-check-label" :for="t.id">{{ t.tag }}</label>
                 </div>
               </div>
+              <span v-if="errors.tags" class="small text-danger">{{ errors.tags }}</span>
             </div>
           </div>
         </div>
@@ -135,7 +143,8 @@ export default {
     book: Object,
     bookCategories: Object,
     publishers: Object,
-    tags: Object
+    tags: Object,
+    errors: Object
   },
   mounted() {
     this.form.cover = this.book.cover;

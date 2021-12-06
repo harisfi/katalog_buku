@@ -23,18 +23,21 @@
                 <option value="" disabled selected>- Pilih Kategori -</option>
                 <option v-for="c in blogCategories" :key="c.id" :value="c.id">{{ c.kategori_blog }}</option>
               </select>
+              <span v-if="errors.blog_category_id" class="small text-danger">{{ errors.blog_category_id }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="judul" class="col-sm-3 col-form-label">Judul</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.judul" id="judul">
+              <span v-if="errors.judul" class="small text-danger">{{ errors.judul }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="isi" class="col-sm-3 col-form-label">Isi</label>
             <div class="col-sm-7">
               <textarea class="form-control" id="editor1"></textarea>
+              <span v-if="errors.isi" class="small text-danger">{{ errors.isi }}</span>
             </div>
           </div>
         </div>
@@ -77,7 +80,8 @@ export default {
   },
   props: {
     blog: Object,
-    blogCategories: Array
+    blogCategories: Array,
+    errors: Object
   },
   mounted() {
     this.form.judul = this.blog.judul;

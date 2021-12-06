@@ -13,18 +13,21 @@
             <label for="pass_lama" class="col-sm-3 col-form-label">Password Lama</label>
             <div class="col-sm-7">
               <input type="password" class="form-control" id="pass_lama" v-model="form.old_pass" autocomplete="current-password">
+              <span v-if="errors.old_pass" class="small text-danger">{{ errors.old_pass }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="pass_baru" class="col-sm-3 col-form-label">Password Baru</label>
             <div class="col-sm-7">
               <input type="password" class="form-control" id="pass_baru" v-model="form.password" autocomplete="new-password">
+              <span v-if="errors.password" class="small text-danger">{{ errors.password }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="konfirmasi" class="col-sm-3 col-form-label">Konfirmasi Password Baru</label>
             <div class="col-sm-7">
               <input type="password" class="form-control" id="konfirmasi" v-model="form.password_confirmation" autocomplete="new-password">
+              <span v-if="errors.password_confirmation" class="small text-danger">{{ errors.password_confirmation }}</span>
             </div>
           </div>
         </div>

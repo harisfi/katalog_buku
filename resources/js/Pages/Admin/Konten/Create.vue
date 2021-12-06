@@ -20,12 +20,14 @@
             <label for="judul" class="col-sm-3 col-form-label">Judul</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.judul">
+              <span v-if="errors.judul" class="small text-danger">{{ errors.judul }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="isi" class="col-sm-3 col-form-label">Isi</label>
             <div class="col-sm-7">
               <textarea class="form-control" id="editor1"></textarea>
+              <span v-if="errors.isi" class="small text-danger">{{ errors.isi }}</span>
             </div>
           </div>
         </div>
@@ -64,6 +66,9 @@ export default {
         isi: null
       }
     };
+  },
+  props: {
+    errors: Object
   },
   methods: {
     submit() {

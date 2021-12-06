@@ -36,30 +36,35 @@
                   {{ form.progress.percentage }}%
                 </div>
               </div>
+              <span v-if="errors.foto" class="small text-danger">{{ errors.foto }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="nama" class="col-sm-3 col-form-label">Nama</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.name" id="nama">
+              <span v-if="errors.name" class="small text-danger">{{ errors.name }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="email" class="col-sm-3 col-form-label">Email</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.email" id="email">
+              <span v-if="errors.email" class="small text-danger">{{ errors.email }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="username" class="col-sm-3 col-form-label">Username</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.username" id="username">
+              <span v-if="errors.username" class="small text-danger">{{ errors.username }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="password" class="col-sm-3 col-form-label">Password</label>
             <div class="col-sm-7">
               <input type="password" class="form-control" v-model="form.password" id="password">
+              <span v-if="errors.password" class="small text-danger">{{ errors.password }}</span>
             </div>
           </div>
           <div class="form-group row">
@@ -70,6 +75,7 @@
                 <option value="superadmin">Superadmin</option>
                 <option value="admin">Admin</option>
               </select>
+              <span v-if="errors.level" class="small text-danger">{{ errors.level }}</span>
             </div>
           </div>
         </div>
@@ -112,6 +118,9 @@ export default {
         foto: null
       }
     };
+  },
+  props: {
+    errors: Object
   },
   methods: {
     submit() {

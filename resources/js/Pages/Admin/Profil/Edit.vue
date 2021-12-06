@@ -33,18 +33,21 @@
                   {{ form.progress.percentage }}%
                 </div>
               </div>
+              <span v-if="errors.foto" class="small text-danger">{{ errors.foto }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="nama" class="col-sm-3 col-form-label">Nama</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.name" id="nama">
+              <span v-if="errors.name" class="small text-danger">{{ errors.name }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="email" class="col-sm-3 col-form-label">Email</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.email" id="email">
+              <span v-if="errors.email" class="small text-danger">{{ errors.email }}</span>
             </div>
           </div>
         </div>
@@ -86,7 +89,8 @@ export default {
     };
   },
   props: {
-    profile: Object
+    profile: Object,
+    errors: Object
   },
   mounted() {
     this.form.name = this.profile.name;

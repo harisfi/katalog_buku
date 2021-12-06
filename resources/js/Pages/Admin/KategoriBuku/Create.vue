@@ -20,6 +20,7 @@
             <label for="kategoribuku" class="col-sm-3 col-form-label">Kategori Buku</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.kategori_buku">
+              <span v-if="errors.kategori_buku" class="small text-danger">{{ errors.kategori_buku }}</span>
             </div>
           </div>
         </div>
@@ -57,6 +58,9 @@ export default {
         kategori_buku: null
       }
     };
+  },
+  props: {
+    errors: Object
   },
   methods: {
     submit() {

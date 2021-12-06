@@ -20,12 +20,14 @@
             <label for="Penerbit" class="col-sm-3 col-form-label">Penerbit</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.penerbit">
+              <span v-if="errors.penerbit" class="small text-danger">{{ errors.penerbit }}</span>
             </div>
           </div>
           <div class="form-group row">
             <label for="isi" class="col-sm-3 col-form-label">Alamat</label>
             <div class="col-sm-7">
               <textarea class="form-control" rows="3" v-model="form.alamat"></textarea>
+              <span v-if="errors.alamat" class="small text-danger">{{ errors.alamat }}</span>
             </div>
           </div>
         </div>
@@ -66,7 +68,8 @@ export default {
     };
   },
   props: {
-    publisher: Object
+    publisher: Object,
+    errors: Object
   },
   mounted() {
     this.form.penerbit = this.publisher.penerbit;

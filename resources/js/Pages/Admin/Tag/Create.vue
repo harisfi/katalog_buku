@@ -20,6 +20,7 @@
             <label for="tag" class="col-sm-3 col-form-label">Tag</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.tag">
+              <span v-if="errors.tag" class="small text-danger">{{ errors.tag }}</span>
             </div>
           </div>
         </div>
@@ -57,6 +58,9 @@ export default {
         tag: null
       }
     };
+  },
+  props: {
+    errors: Object
   },
   methods: {
     submit() {

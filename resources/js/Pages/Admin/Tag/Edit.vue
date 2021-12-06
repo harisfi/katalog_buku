@@ -20,6 +20,7 @@
             <label for="Tag" class="col-sm-3 col-form-label">Tag</label>
             <div class="col-sm-7">
               <input type="text" class="form-control" v-model="form.tag">
+              <span v-if="errors.tag" class="small text-danger">{{ errors.tag }}</span>
             </div>
           </div>
         </div>
@@ -59,7 +60,8 @@ export default {
     };
   },
   props: {
-    tags: Object
+    tags: Object,
+    errors: Object
   },
   mounted() {
     this.form.tag = this.tags.tag;
