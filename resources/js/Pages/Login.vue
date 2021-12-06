@@ -11,21 +11,27 @@
         <div class="card-body login-card-body">
           <p class="login-box-msg">Sign in to start your session</p>
           <form @submit.prevent="submit">
-            <div class="input-group mb-3">
-              <input type="text" v-model="form.username" class="form-control" placeholder="Username"/>
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-user"></span>
+            <div class="mb-3">
+              <div class="input-group">
+                <input type="text" v-model="form.username" class="form-control" placeholder="Username"/>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
                 </div>
               </div>
+              <span v-if="errors.username" class="small text-danger">{{ errors.username }}</span>
             </div>
-            <div class="input-group mb-3" id="showHidePassword">
-              <input :type="showPass ? 'text' : 'password'" v-model="form.password" class="form-control" placeholder="Password" autocomplete="current-password"/>
-              <div class="input-group-append">
-                <button type="button" @click="showPass = !showPass" class="input-group-text">
-                  <i :class="'fa fa-eye' + (!showPass ? '-slash' : '')" aria-hidden="true"></i>
-                </button>
+            <div class="mb-3">
+              <div class="input-group">
+                <input :type="showPass ? 'text' : 'password'" v-model="form.password" class="form-control" placeholder="Password" autocomplete="current-password"/>
+                <div class="input-group-append">
+                  <button type="button" @click="showPass = !showPass" class="input-group-text">
+                    <i :class="'fa fa-eye' + (!showPass ? '-slash' : '')" aria-hidden="true"></i>
+                  </button>
+                </div>
               </div>
+              <span v-if="errors.password" class="small text-danger">{{ errors.password }}</span>
             </div>
             <div class="row">
               <div class="col-8"></div>
@@ -60,6 +66,9 @@ export default {
         password: null
       }
     };
+  },
+  props: {
+    errors: Object
   },
   mounted() {
     this.showFlashedMessage();
