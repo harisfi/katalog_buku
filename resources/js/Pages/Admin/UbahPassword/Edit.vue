@@ -66,6 +66,9 @@ export default {
       }
     };
   },
+  props: {
+    errors: Object
+  },
   mounted() {
     this.showFlashedMessage();
   },
